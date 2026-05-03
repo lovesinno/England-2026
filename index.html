@@ -1,0 +1,1967 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>英倫峽灣 · 旅遊手冊</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1C2B4A;
+  --navy2: #263559;
+  --gold: #C8A951;
+  --gold2: #E2C97E;
+  --gold-bg: #FDF8EE;
+  --cream: #F7F4EE;
+  --white: #FFFFFF;
+  --slate: #5A6478;
+  --slate2: #8A93A6;
+  --sea: #2E6E96;
+  --sea-bg: #EAF4FB;
+  --green: #2E7D5E;
+  --green-bg: #EAF5F0;
+  --amber: #B85C00;
+  --amber-bg: #FFF3E0;
+  --red: #C0392B;
+  --red-bg: #FDECEA;
+  --border: rgba(28,43,74,0.08);
+  --shadow: 0 2px 16px rgba(28,43,74,0.10);
+  --shadow-sm: 0 1px 6px rgba(28,43,74,0.08);
+  --radius: 14px;
+  --radius-sm: 9px;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--navy);
+  min-height: 100vh;
+  padding-bottom: 90px;
+  overscroll-behavior: none;
+}
+
+/* ── TOP HERO ── */
+.hero {
+  background: linear-gradient(160deg, var(--navy) 0%, var(--navy2) 100%);
+  padding: 54px 20px 28px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content:'';
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse at 15% 40%, rgba(200,169,81,.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 10%, rgba(46,110,150,.25) 0%, transparent 45%);
+}
+.hero-eyebrow {
+  font-size:10px; letter-spacing:3.5px; text-transform:uppercase;
+  color: var(--gold); font-weight:600;
+  position:relative; margin-bottom:10px;
+}
+.hero-title {
+  font-family:'Playfair Display', serif;
+  font-size:34px; font-weight:400; color:#fff;
+  line-height:1.15; position:relative;
+}
+.hero-title em { font-style:italic; color:var(--gold2); }
+.hero-meta {
+  display:flex; gap:16px; margin-top:18px;
+  position:relative; flex-wrap:wrap;
+}
+.hero-chip {
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:20px; padding:5px 12px;
+  font-size:11px; color:rgba(255,255,255,.8);
+  font-weight:500; letter-spacing:.3px;
+}
+.hero-chip strong { color:var(--gold2); }
+
+/* ── BOTTOM NAV ── */
+.bottom-nav {
+  position: fixed; bottom:0; left:0; right:0;
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  display: flex;
+  z-index: 100;
+  padding-bottom: env(safe-area-inset-bottom);
+  box-shadow: 0 -4px 20px rgba(28,43,74,.08);
+}
+.nav-tab {
+  flex:1; display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  padding: 10px 4px 8px;
+  cursor: pointer; border:none; background:none;
+  transition: all .2s;
+  color: var(--slate2);
+  font-size:9px; font-weight:500; letter-spacing:.5px;
+  text-transform:uppercase; gap:4px;
+}
+.nav-tab .icon { font-size:20px; transition: transform .2s; }
+.nav-tab.active { color: var(--navy); }
+.nav-tab.active .icon { transform: translateY(-2px); }
+.nav-tab-dot {
+  width:4px; height:4px; border-radius:50%;
+  background:var(--gold); margin-top:2px;
+  opacity:0; transition:.2s;
+}
+.nav-tab.active .nav-tab-dot { opacity:1; }
+
+/* ── SECTION ── */
+.section { display:none; padding:20px 16px 0; }
+.section.active { display:block; }
+
+/* ── SECTION LABEL ── */
+.sec-label {
+  display:flex; align-items:center; gap:8px;
+  margin: 20px 0 12px;
+}
+.sec-label-line { flex:1; height:1px; background:var(--border); }
+.sec-label-text {
+  font-size:10px; letter-spacing:2.5px; text-transform:uppercase;
+  color:var(--slate2); font-weight:600; white-space:nowrap;
+}
+
+/* ── DAY CARD ── */
+.day-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  margin-bottom: 14px;
+  box-shadow: var(--shadow-sm);
+  overflow:hidden;
+}
+.day-header {
+  display:flex; align-items:stretch; cursor:pointer;
+  user-select:none;
+}
+.day-badge {
+  background: var(--navy);
+  min-width:68px; padding:14px 10px;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  text-align:center; flex-shrink:0;
+}
+.db-num {
+  font-family:'Playfair Display',serif;
+  font-size:22px; color:var(--gold2); line-height:1;
+}
+.db-label { font-size:7.5px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,.4); margin-top:2px; }
+.db-date { font-size:9.5px; color:rgba(255,255,255,.65); margin-top:5px; font-weight:300; line-height:1.4; }
+.day-summary {
+  flex:1; padding:14px 14px 14px 16px;
+  display:flex; flex-direction:column; justify-content:center;
+}
+.ds-title {
+  font-family:'Playfair Display',serif;
+  font-size:15px; font-weight:600; color:var(--navy);
+  line-height:1.3; margin-bottom:5px;
+}
+.ds-tags { display:flex; gap:5px; flex-wrap:wrap; }
+.ds-tag {
+  font-size:9.5px; font-weight:600; padding:2px 8px;
+  border-radius:20px; letter-spacing:.3px;
+}
+.tag-hotel { background:#EEF2FF; color:#4257C0; }
+.tag-port  { background:var(--sea-bg); color:var(--sea); }
+.tag-cruise{ background:#F0F7FF; color:#2060A0; }
+.tag-fly   { background:var(--green-bg); color:var(--green); }
+.tag-sea   { background:#E8F4FB; color:#1D6085; }
+.day-chevron {
+  display:flex; align-items:center; padding:0 14px 0 4px;
+  color:var(--slate2); font-size:18px;
+  transition: transform .25s;
+}
+.day-card.open .day-chevron { transform: rotate(90deg); }
+
+/* ── DAY BODY ── */
+.day-body { display:none; border-top:1px solid var(--border); }
+.day-card.open .day-body { display:block; }
+
+/* ── ACTIVITY ITEM ── */
+.act-item {
+  display:flex; gap:12px; align-items:flex-start;
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--border);
+  transition: background .15s;
+}
+.act-item:last-child { border-bottom:none; }
+.act-item.done .act-main { opacity:.45; text-decoration:line-through; text-decoration-color:var(--slate2); }
+.act-time-col {
+  min-width:36px; text-align:right; flex-shrink:0;
+  padding-top:1px;
+}
+.act-time {
+  font-size:10px; color:var(--gold); font-weight:700;
+  letter-spacing:.3px; line-height:1.5;
+}
+.act-cb {
+  width:20px; height:20px; border-radius:6px;
+  border:2px solid var(--border); flex-shrink:0;
+  cursor:pointer; display:flex; align-items:center; justify-content:center;
+  transition:.2s; margin-top:1px; background:var(--white);
+}
+.act-item.done .act-cb {
+  background:var(--green); border-color:var(--green);
+}
+.act-cb::after {
+  content:'✓'; font-size:11px; color:white;
+  opacity:0; font-weight:700;
+  transition:.15s;
+}
+.act-item.done .act-cb::after { opacity:1; }
+.act-main { flex:1; }
+.act-label {
+  font-size:13px; color:var(--navy); line-height:1.5;
+  font-weight:400;
+}
+.act-label strong { font-weight:600; }
+.act-note {
+  font-size:11px; color:var(--slate); margin-top:3px; line-height:1.5;
+}
+
+/* ── MAP BUTTON ── */
+.map-btn {
+  display:inline-flex; align-items:center; gap:5px;
+  margin-top:7px;
+  background: var(--sea-bg);
+  color: var(--sea);
+  border:none; border-radius:20px;
+  padding:5px 11px; font-size:11px; font-weight:600;
+  cursor:pointer; font-family:inherit;
+  transition: all .2s; letter-spacing:.2px;
+  -webkit-appearance:none;
+}
+.map-btn:hover, .map-btn:active { background:var(--sea); color:white; }
+.map-btn .map-icon { font-size:12px; }
+
+/* ── DINNER TAG ── */
+.dinner-row {
+  display:flex; align-items:center; gap:8px;
+  background:var(--gold-bg);
+  padding:10px 16px;
+  border-top:1px solid rgba(200,169,81,.2);
+}
+.dinner-icon { font-size:16px; flex-shrink:0; }
+.dinner-info { flex:1; }
+.dinner-name { font-size:12.5px; font-weight:600; color:var(--navy); }
+.dinner-sub  { font-size:10.5px; color:var(--slate); margin-top:1px; }
+.dinner-time {
+  background:var(--gold); color:white;
+  font-size:10px; font-weight:700;
+  padding:3px 9px; border-radius:20px; letter-spacing:.5px; flex-shrink:0;
+}
+
+/* ── PORT SCHEDULE ── */
+.port-schedule {
+  display:flex; gap:8px; padding:10px 16px;
+  background:var(--cream);
+  border-top:1px solid var(--border);
+  flex-wrap:wrap;
+}
+.ps-chip {
+  display:flex; align-items:center; gap:5px;
+  font-size:11px; font-weight:700; padding:4px 11px;
+  border-radius:20px; letter-spacing:.3px;
+}
+.ps-arrive { background:var(--sea-bg); color:var(--sea); }
+.ps-depart { background:var(--amber-bg); color:var(--amber); }
+.ps-warn   { background:var(--red-bg); color:var(--red); }
+.ps-atsea  { background:var(--cream); color:var(--slate); font-style:italic; font-weight:400; }
+
+/* ── TIP BOX ── */
+.tip-box {
+  margin:10px 16px 14px;
+  background:var(--gold-bg);
+  border-left:3px solid var(--gold);
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  padding:10px 13px;
+  font-size:11.5px; color:var(--slate); line-height:1.65;
+}
+.tip-box strong { color:var(--navy); }
+
+/* ── WARN BOX ── */
+.warn-box {
+  margin:0 16px 14px;
+  background:var(--red-bg);
+  border-left:3px solid var(--red);
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  padding:10px 13px;
+  font-size:11.5px; color:var(--red); font-weight:600; line-height:1.6;
+}
+
+/* ── INFO CARD ── */
+.info-card {
+  background:var(--white); border-radius:var(--radius);
+  padding:16px; margin-bottom:12px;
+  box-shadow:var(--shadow-sm);
+}
+.ic-title {
+  font-family:'Playfair Display',serif;
+  font-size:17px; font-weight:600; color:var(--navy);
+  margin-bottom:4px;
+}
+.ic-sub { font-size:10.5px; color:var(--gold); font-weight:600; letter-spacing:.5px; margin-bottom:8px; }
+.ic-body { font-size:12px; color:var(--slate); line-height:1.7; }
+.ic-row  { display:flex; justify-content:space-between; align-items:center; padding:7px 0; border-bottom:1px solid var(--border); }
+.ic-row:last-child { border-bottom:none; }
+.ic-key  { font-size:11.5px; color:var(--slate); }
+.ic-val  { font-size:11.5px; font-weight:600; color:var(--navy); text-align:right; }
+
+/* ── REST CARD ── */
+.rest-card {
+  background:var(--white); border-radius:var(--radius);
+  margin-bottom:12px; box-shadow:var(--shadow-sm);
+  overflow:hidden;
+}
+.rc-head {
+  padding:14px 16px 10px;
+  border-left:4px solid var(--sea);
+}
+.rc-name { font-family:'Playfair Display',serif; font-size:17px; font-weight:600; color:var(--navy); }
+.rc-cat  { font-size:10.5px; color:var(--gold); font-weight:600; letter-spacing:.3px; margin-top:2px; }
+.rc-desc { font-size:12px; color:var(--slate); line-height:1.65; padding:0 16px 14px; }
+.rc-actions { display:flex; gap:8px; padding:0 16px 14px; }
+.rc-btn {
+  display:inline-flex; align-items:center; gap:5px;
+  background:var(--sea-bg); color:var(--sea);
+  border:none; border-radius:20px; padding:6px 14px;
+  font-size:11px; font-weight:600; cursor:pointer;
+  text-decoration:none; transition:.2s; font-family:inherit;
+  -webkit-appearance:none;
+}
+.rc-btn:active { background:var(--sea); color:white; }
+
+/* ── CRUISE TABLE ── */
+.cruise-table {
+  background:var(--white); border-radius:var(--radius);
+  overflow:hidden; box-shadow:var(--shadow-sm); margin-bottom:14px;
+}
+.ct-header {
+  background:var(--navy); padding:12px 16px;
+  display:flex; align-items:center; gap:10px;
+}
+.ct-header-icon { font-size:22px; }
+.ct-header-text h3 {
+  font-family:'Playfair Display',serif;
+  font-size:16px; font-weight:400; color:white;
+}
+.ct-header-text p { font-size:10px; color:var(--gold2); margin-top:2px; letter-spacing:.5px; }
+.ct-badge { margin-left:auto; text-align:right; }
+.ct-badge-val { font-size:13px; font-weight:700; color:white; }
+.ct-badge-sub { font-size:9px; color:var(--gold2); letter-spacing:.5px; }
+.ct-row {
+  display:flex; align-items:center; gap:0;
+  padding:11px 16px; border-bottom:1px solid var(--border);
+}
+.ct-row:last-child { border-bottom:none; }
+.ct-date { min-width:44px; font-size:10.5px; color:var(--slate2); font-weight:600; }
+.ct-port { flex:1; }
+.ct-port-name { font-size:12.5px; font-weight:600; color:var(--navy); }
+.ct-port-rest { font-size:10.5px; color:var(--slate); margin-top:1px; }
+.ct-time { font-size:10.5px; font-weight:700; color:var(--gold); text-align:right; flex-shrink:0; }
+
+/* ── NOTE CARD ── */
+.note-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.note-card {
+  background:var(--white); border-radius:var(--radius);
+  padding:14px 13px; box-shadow:var(--shadow-sm);
+}
+.nc-icon { font-size:22px; margin-bottom:7px; }
+.nc-title { font-size:11px; font-weight:700; color:var(--navy); margin-bottom:5px; }
+.nc-body { font-size:11px; color:var(--slate); line-height:1.65; }
+
+/* ── FLIGHT BAR ── */
+.flight-bar {
+  background:var(--navy); border-radius:var(--radius);
+  padding:14px 18px; margin-bottom:14px;
+  display:flex; align-items:center; gap:10px;
+}
+.fb-seg { text-align:center; }
+.fb-code { font-family:'Playfair Display',serif; font-size:22px; color:var(--gold2); }
+.fb-city { font-size:8.5px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,.4); margin-top:1px; }
+.fb-arrow { flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; }
+.fb-line  { height:1px; width:100%; background:linear-gradient(to right,transparent,var(--gold),transparent); }
+.fb-num   { font-size:10px; color:var(--gold2); letter-spacing:1px; }
+
+/* ── SCROLL TOP ── */
+.scroll-top {
+  position:fixed; bottom:80px; right:16px;
+  width:40px; height:40px; border-radius:50%;
+  background:var(--navy); color:var(--gold2);
+  border:none; font-size:18px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 4px 14px rgba(28,43,74,.3);
+  opacity:0; transition:.3s; z-index:99;
+}
+.scroll-top.show { opacity:1; }
+
+/* ── SECTION HEADER CARD ── */
+.section-hero {
+  background:linear-gradient(135deg,var(--navy),var(--navy2));
+  border-radius:var(--radius); padding:18px 18px 16px;
+  margin-bottom:16px; position:relative; overflow:hidden;
+}
+.section-hero::after {
+  content:'';
+  position:absolute; inset:0;
+  background:radial-gradient(ellipse at 90% 10%,rgba(200,169,81,.2) 0%,transparent 55%);
+}
+.sh-label { font-size:9.5px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); font-weight:600; position:relative; z-index:1; margin-bottom:6px; }
+.sh-title { font-family:'Playfair Display',serif; font-size:22px; font-weight:400; color:white; position:relative; z-index:1; }
+.sh-sub   { font-size:11px; color:rgba(255,255,255,.55); margin-top:5px; position:relative; z-index:1; }
+
+/* progress bar */
+.progress-bar-wrap { margin:16px 0 4px; }
+.pb-label { display:flex; justify-content:space-between; font-size:11px; color:var(--slate); margin-bottom:6px; }
+.pb-track { height:5px; background:var(--border); border-radius:3px; overflow:hidden; }
+.pb-fill  { height:100%; background:var(--gold); border-radius:3px; transition:width .4s; }
+
+/* ── BOOKING CARD ── */
+.booking-card {
+  margin: 8px 16px 4px;
+  background: var(--gold-bg);
+  border: 1.5px solid rgba(200,169,81,.35);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.booking-header {
+  display: flex; align-items: center; gap: 8px;
+  padding: 9px 13px 8px;
+  border-bottom: 1px solid rgba(200,169,81,.2);
+}
+.booking-icon { font-size: 15px; flex-shrink:0; }
+.booking-title { font-size: 12px; font-weight: 700; color: var(--navy); flex: 1; }
+.booking-status {
+  font-size: 10px; font-weight: 700; padding: 3px 9px;
+  border-radius: 20px; letter-spacing: .3px; flex-shrink:0;
+  transition: all .2s;
+}
+.booking-status.pending { background: var(--amber-bg); color: var(--amber); }
+.booking-status.booked  { background: var(--green-bg); color: var(--green); }
+.booking-body { padding: 10px 13px 12px; display: flex; flex-direction: column; gap: 8px; }
+.booking-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.booking-cb-wrap {
+  display: flex; align-items: center; gap: 7px; cursor: pointer;
+}
+.booking-cb {
+  width: 20px; height: 20px; border-radius: 6px;
+  border: 2px solid rgba(200,169,81,.5); flex-shrink:0;
+  display: flex; align-items: center; justify-content: center;
+  background: white; transition: .2s;
+}
+.booking-cb.checked { background: var(--green); border-color: var(--green); }
+.booking-cb.checked::after { content:'✓'; font-size:11px; color:white; font-weight:700; }
+.booking-cb-label { font-size: 12px; color: var(--navy); font-weight: 500; }
+.booking-time-wrap { display: flex; align-items: center; gap: 6px; margin-top: 2px; flex-wrap:wrap; }
+.booking-time-label { font-size: 11px; color: var(--slate); white-space:nowrap; }
+.booking-time-select {
+  border: 1.5px solid rgba(200,169,81,.4);
+  border-radius: 8px; padding: 4px 8px;
+  font-size: 12px; font-weight: 600; color: var(--navy);
+  background: white; font-family: inherit;
+  -webkit-appearance: none; appearance: none;
+  cursor: pointer; min-width: 90px;
+}
+.booking-time-custom {
+  border: 1.5px solid rgba(200,169,81,.4);
+  border-radius: 8px; padding: 4px 8px;
+  font-size: 12px; font-weight: 600; color: var(--navy);
+  background: white; font-family: inherit; width: 90px;
+}
+.booking-note { font-size: 10.5px; color: var(--slate); line-height: 1.5; }
+.booking-note a { color: var(--sea); text-decoration: underline; }
+.booked-time-display {
+  font-size: 11px; font-weight: 700; color: var(--green);
+  background: var(--green-bg); padding: 2px 9px;
+  border-radius: 20px; display: none;
+}
+.booking-cb.checked ~ .booked-time-display { display: inline-block; }
+
+@media(max-width:380px) {
+  .hero-title { font-size:28px; }
+  .note-grid  { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">2025 · 旅遊行程手冊</div>
+  <div class="hero-title">英倫 · 峽灣<br><em>深度之旅</em></div>
+  <div class="hero-meta">
+    <div class="hero-chip">✈ BR067 / BR068</div>
+    <div class="hero-chip">🚢 Sky Princess <strong>S115</strong></div>
+    <div class="hero-chip">📋 <strong>9JWL8W</strong></div>
+    <div class="hero-chip">5/7 — 5/20 · 14天</div>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <button class="nav-tab active" onclick="showTab('london1')" id="tab-london1">
+    <span class="icon">🏰</span><span>倫敦前段</span>
+    <div class="nav-tab-dot"></div>
+  </button>
+  <button class="nav-tab" onclick="showTab('cruise')" id="tab-cruise">
+    <span class="icon">🚢</span><span>郵輪</span>
+    <div class="nav-tab-dot"></div>
+  </button>
+  <button class="nav-tab" onclick="showTab('london2')" id="tab-london2">
+    <span class="icon">👑</span><span>倫敦後段</span>
+    <div class="nav-tab-dot"></div>
+  </button>
+  <button class="nav-tab" onclick="showTab('info')" id="tab-info">
+    <span class="icon">📋</span><span>資訊</span>
+    <div class="nav-tab-dot"></div>
+  </button>
+</nav>
+
+<!-- ════════════════════════════════
+     TAB 1: 倫敦前段
+════════════════════════════════ -->
+<div class="section active" id="sec-london1">
+
+  <div style="height:4px"></div>
+  <div class="section-hero">
+    <div class="sh-label">Part 1 · 倫敦前段</div>
+    <div class="sh-title">Intercontinental<br>Park Lane</div>
+    <div class="sh-sub">5月7日 — 5月9日 · 2晚 · Hyde Park Corner 步行可達</div>
+  </div>
+
+  <div class="flight-bar">
+    <div class="fb-seg"><div class="fb-code">TPE</div><div class="fb-city">台北桃園</div></div>
+    <div class="fb-arrow"><div class="fb-num">✈ BR067</div><div class="fb-line"></div></div>
+    <div class="fb-seg"><div class="fb-code">LHR</div><div class="fb-city">倫敦希斯洛</div></div>
+  </div>
+
+  <!-- D1 -->
+  <div class="day-card" id="card-d1">
+    <div class="day-header" onclick="toggleCard('card-d1')">
+      <div class="day-badge">
+        <div class="db-num">D1</div><div class="db-label">Day</div><div class="db-date">5/7<br>Wed</div>
+      </div>
+      <div class="day-summary">
+        <div class="ds-title">抵達倫敦 · 安頓休息</div>
+        <div class="ds-tags">
+          <span class="ds-tag tag-hotel">🏨 Intercontinental</span>
+          <span class="ds-tag tag-fly">✈ 抵達日</span>
+        </div>
+      </div>
+      <div class="day-chevron">›</div>
+    </div>
+    <div class="day-body">
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">抵達</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label"><strong>預約接機包車</strong>於 Heathrow 直送飯店，辦理入住</div>
+          <div class="act-note">省去轉乘行李之苦，直達梅費爾</div>
+        </div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">傍晚</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">漫步 <strong>Hyde Park</strong>，感受倫敦初夏氣息</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Hyde+Park+London', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">晚餐</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">飯店酒吧或 <strong>Shepherd Market</strong> 輕食</div>
+          <div class="act-note">調整時差，不需趕行程</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Shepherd+Market+Mayfair+London', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="tip-box">💡 台灣與倫敦夏令時差 <strong>7 小時</strong>，第一天以休息為主，順著身體節奏調整。</div>
+    </div>
+  </div>
+
+  <!-- D2 -->
+  <div class="day-card" id="card-d2">
+    <div class="day-header" onclick="toggleCard('card-d2')">
+      <div class="day-badge">
+        <div class="db-num">D2</div><div class="db-label">Day</div><div class="db-date">5/8<br>Thu</div>
+      </div>
+      <div class="day-summary">
+        <div class="ds-title">輕鬆調時差 · Harrods</div>
+        <div class="ds-tags">
+          <span class="ds-tag tag-hotel">🛍 購物</span>
+        </div>
+      </div>
+      <div class="day-chevron">›</div>
+    </div>
+    <div class="day-body">
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">上午</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">睡到自然醒，<strong>Hyde Park</strong> 晨間漫步</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Hyde+Park+London', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">午餐</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label"><strong>Shepherd Market</strong> 或梅費爾街邊咖啡廳</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Shepherd+Market+Mayfair+London', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">下午</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">📍 <strong>Harrods</strong>（步行約15分鐘）</div>
+          <div class="act-note">食品廳、百年貨架、伴手禮區 · 4樓 Harrods Tea Rooms</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Harrods+Knightsbridge+London', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="booking-card">
+        <div class="booking-header">
+          <span class="booking-icon">📅</span>
+          <span class="booking-title">Harrods Tea Rooms · 4樓下午茶（建議預約）</span>
+          <span class="booking-status pending" id="bst-harrods">待預訂</span>
+        </div>
+        <div class="booking-body">
+          <div class="booking-row">
+            <div class="booking-cb-wrap" onclick="toggleBooking('harrods')">
+              <div class="booking-cb" id="bcb-harrods"></div>
+              <span class="booking-cb-label">已預訂</span>
+            </div>
+            <span class="booked-time-display" id="bdisp-harrods"></span>
+          </div>
+          <div class="booking-time-wrap">
+            <span class="booking-time-label">預約時間：</span>
+            <select class="booking-time-select" id="bsel-harrods" onchange="updateBookingTime('harrods')">
+              <option value="">選擇時段</option>
+              <option>11:00</option><option>11:30</option><option>12:00</option>
+              <option>12:30</option><option>13:00</option><option>13:30</option>
+              <option>14:00</option><option>14:30</option><option>15:00</option>
+              <option>15:30</option><option>16:00</option><option>16:30</option>
+            </select>
+          </div>
+          <div class="booking-note">📞 可於官網或電話預約 · <a onclick="window.open('https://www.harrods.com/en-gb/restaurants','_blank')">Harrods 官網</a></div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">傍晚</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">漫步 <strong>Green Park</strong>，欣賞<strong>白金漢宮</strong>外觀</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Buckingham+Palace+London', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">晚餐</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">梅費爾區晚餐（見資訊頁餐廳推薦）</div>
+        </div>
+      </div>
+      <div class="tip-box">💡 順著身體調整時差，才能以最佳狀態迎接郵輪旅程。</div>
+    </div>
+  </div>
+
+  <!-- D3 -->
+  <div class="day-card" id="card-d3">
+    <div class="day-header" onclick="toggleCard('card-d3')">
+      <div class="day-badge">
+        <div class="db-num">D3</div><div class="db-label">Day</div><div class="db-date">5/9<br>Fri</div>
+      </div>
+      <div class="day-summary">
+        <div class="ds-title">包車 Southampton · 登輪</div>
+        <div class="ds-tags">
+          <span class="ds-tag tag-cruise">🚢 登船日</span>
+        </div>
+      </div>
+      <div class="day-chevron">›</div>
+    </div>
+    <div class="day-body">
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">10:00</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main"><div class="act-label"><strong>飯店退房</strong>，包車出發（約 1.5–2 小時）</div></div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">~12:00</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">抵達 <strong>Southampton 郵輪碼頭</strong>，辦理登船</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Southampton+Cruise+Terminal+UK', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">16:00</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main"><div class="act-label">⚓ <strong>Sky Princess 啟程</strong>（⛵ 離港 16:00），揚帆挪威</div></div>
+      </div>
+      <div class="dinner-row">
+        <div class="dinner-icon">🍽</div>
+        <div class="dinner-info">
+          <div class="dinner-name">Crown Grill</div>
+          <div class="dinner-sub">Deck 7 · 已預訂 · 登船首晚牛排晚餐</div>
+        </div>
+        <div class="dinner-time">17:30</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end london1 -->
+
+
+<!-- ════════════════════════════════
+     TAB 2: 郵輪
+════════════════════════════════ -->
+<div class="section" id="sec-cruise">
+  <div style="height:4px"></div>
+
+  <!-- Cruise info bar -->
+  <div class="cruise-table">
+    <div class="ct-header">
+      <div class="ct-header-icon">🚢</div>
+      <div class="ct-header-text">
+        <h3>Sky Princess</h3>
+        <p>5/9–5/16 · 7晚 · Norwegian Fjords</p>
+      </div>
+      <div class="ct-badge">
+        <div class="ct-badge-val">S115</div>
+        <div class="ct-badge-sub">9JWL8W</div>
+      </div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-date">5/9 五</div>
+      <div class="ct-port"><div class="ct-port-name">Southampton 啟程</div><div class="ct-port-rest">Crown Grill</div></div>
+      <div class="ct-time">出發 16:00</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-date">5/10 六</div>
+      <div class="ct-port"><div class="ct-port-name">🌊 海上航行</div><div class="ct-port-rest">SABATINI's Italian Trattoria</div></div>
+      <div class="ct-time">全日</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-date">5/11 日</div>
+      <div class="ct-port"><div class="ct-port-name">Stavanger</div><div class="ct-port-rest">The Catch by Rudy</div></div>
+      <div class="ct-time">08:00–16:00</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-date">5/12 一</div>
+      <div class="ct-port"><div class="ct-port-name">Olden</div><div class="ct-port-rest">CIELO DINING ROOM</div></div>
+      <div class="ct-time">09:00–17:00</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-date">5/13 二</div>
+      <div class="ct-port"><div class="ct-port-name">Skjolden</div><div class="ct-port-rest">Ultimate Balcony Dinner 🌟</div></div>
+      <div class="ct-time">11:00–20:00</div>
+    </div>
+    <div class="ct-row" style="background:#FFF5F5;">
+      <div class="ct-date">5/14 三</div>
+      <div class="ct-port"><div class="ct-port-name">Bergen ⚠️</div><div class="ct-port-rest">Crown Grill · 最早離港！</div></div>
+      <div class="ct-time" style="color:var(--red)">07:00–14:00</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-date">5/15 四</div>
+      <div class="ct-port"><div class="ct-port-name">🌊 海上返航</div><div class="ct-port-rest">The Catch by Rudy</div></div>
+      <div class="ct-time">全日</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-date">5/16 五</div>
+      <div class="ct-port"><div class="ct-port-name">Southampton 抵達</div><div class="ct-port-rest">包車返倫敦</div></div>
+      <div class="ct-time">抵達 07:00</div>
+    </div>
+  </div>
+
+  <!-- D4 Sea Day -->
+  <div class="day-card" id="card-d4">
+    <div class="day-header" onclick="toggleCard('card-d4')">
+      <div class="day-badge" style="background:#1a3a5c;">
+        <div class="db-num">D4</div><div class="db-label">Day</div><div class="db-date">5/10<br>Sat</div>
+      </div>
+      <div class="day-summary">
+        <div class="ds-title">🌊 海上航行</div>
+        <div class="ds-tags"><span class="ds-tag tag-sea">全日在海</span></div>
+      </div>
+      <div class="day-chevron">›</div>
+    </div>
+    <div class="day-body">
+      <div class="port-schedule"><span class="ps-atsea">🌊 全日航行中</span></div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">全天</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main"><div class="act-label">泳池、Spa、頂層日光甲板，欣賞北海海景</div></div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">傍晚</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main"><div class="act-label">穿越挪威海峽入口，景色轉為峽灣風光</div></div>
+      </div>
+      <div class="dinner-row">
+        <div class="dinner-icon">🍽</div>
+        <div class="dinner-info"><div class="dinner-name">SABATINI's Italian Trattoria</div><div class="dinner-sub">Deck 5 · 已預訂</div></div>
+        <div class="dinner-time">17:50</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- D5 Stavanger -->
+  <div class="day-card" id="card-d5">
+    <div class="day-header" onclick="toggleCard('card-d5')">
+      <div class="day-badge">
+        <div class="db-num">D5</div><div class="db-label">Day</div><div class="db-date">5/11<br>Sun</div>
+      </div>
+      <div class="day-summary">
+        <div class="ds-title">⚓ Stavanger</div>
+        <div class="ds-tags"><span class="ds-tag tag-port">08:00–16:00</span></div>
+      </div>
+      <div class="day-chevron">›</div>
+    </div>
+    <div class="day-body">
+      <div class="port-schedule">
+        <span class="ps-chip ps-arrive">⚓ 抵港 08:00</span>
+        <span class="ps-chip ps-depart">⛵ 離港 16:00</span>
+        <span class="ps-chip ps-warn">⏰ 返船 15:15 前</span>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">上岸</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">📍 <strong>Gamle Stavanger 舊城</strong></div>
+          <div class="act-note">歐洲最完整木造老屋群，碼頭步行 2 分鐘</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Gamle+Stavanger+Norway', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time"></div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">📍 <strong>Øvre Holmegate 彩色街道</strong></div>
+          <div class="act-note">各色建築、咖啡廳與精品店</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Øvre+Holmegate+Stavanger', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time"></div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">📍 <strong>挪威罐頭博物館</strong>（步行10分鐘）</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Norwegian+Canning+Museum+Stavanger', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="dinner-row">
+        <div class="dinner-icon">🍽</div>
+        <div class="dinner-info"><div class="dinner-name">The Catch by Rudy</div><div class="dinner-sub">Deck 7 · 已預訂</div></div>
+        <div class="dinner-time">17:30</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- D6 Olden -->
+  <div class="day-card" id="card-d6">
+    <div class="day-header" onclick="toggleCard('card-d6')">
+      <div class="day-badge">
+        <div class="db-num">D6</div><div class="db-label">Day</div><div class="db-date">5/12<br>Mon</div>
+      </div>
+      <div class="day-summary">
+        <div class="ds-title">⚓ Olden</div>
+        <div class="ds-tags"><span class="ds-tag tag-port">09:00–17:00</span></div>
+      </div>
+      <div class="day-chevron">›</div>
+    </div>
+    <div class="day-body">
+      <div class="port-schedule">
+        <span class="ps-chip ps-arrive">⚓ 抵港 09:00</span>
+        <span class="ps-chip ps-depart">⛵ 離港 17:00</span>
+        <span class="ps-chip ps-warn">⏰ 返船 16:15 前</span>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">上岸</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">步行 15 分鐘至<strong>小鎮中心</strong>，紀念品店與咖啡廳</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Olden+Norway', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time"></div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">📍 <strong>Loen Skylift 天空纜車</strong></div>
+          <div class="act-note">碼頭約 4 哩，計程車可達 · 門票約 £35 · 山頂有餐廳</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Loen+Skylift+Norway', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time"></div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">📍 <strong>Oldevatnet 冰川湖</strong></div>
+          <div class="act-note">碧藍冰川湖色，步行可達</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Oldevatnet+Norway', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="dinner-row">
+        <div class="dinner-icon">🍽</div>
+        <div class="dinner-info"><div class="dinner-name">CIELO DINING ROOM（主餐廳）</div><div class="dinner-sub">Deck 6 · 已預訂</div></div>
+        <div class="dinner-time">17:30</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- D7 Skjolden -->
+  <div class="day-card" id="card-d7">
+    <div class="day-header" onclick="toggleCard('card-d7')">
+      <div class="day-badge">
+        <div class="db-num">D7</div><div class="db-label">Day</div><div class="db-date">5/13<br>Tue</div>
+      </div>
+      <div class="day-summary">
+        <div class="ds-title">⚓ Skjolden</div>
+        <div class="ds-tags"><span class="ds-tag tag-port">11:00–20:00</span><span class="ds-tag" style="background:#FDF0FF;color:#7B2FA8;">🌟 陽台晚餐</span></div>
+      </div>
+      <div class="day-chevron">›</div>
+    </div>
+    <div class="day-body">
+      <div class="port-schedule">
+        <span class="ps-chip ps-arrive">⚓ 抵港 11:00</span>
+        <span class="ps-chip ps-depart">⛵ 離港 20:00</span>
+        <span class="ps-chip ps-warn">⏰ 返船 19:15 前</span>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">上岸</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">Sognefjord 盡頭小村，<strong>步行感受三面環山雪頂</strong></div>
+          <div class="act-note">人口僅 300 人，北歐最長峽灣終點</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Skjolden+Norway', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time"></div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">小村咖啡廳：<strong>挪威華夫餅 + 熱可可</strong></div>
+        </div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">航行中</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">站甲板欣賞<strong>峽灣行進景觀</strong>（全程最大亮點）</div>
+        </div>
+      </div>
+      <div class="dinner-row" style="background:#FDF0FF;">
+        <div class="dinner-icon">🌟</div>
+        <div class="dinner-info">
+          <div class="dinner-name">Ultimate Balcony Dinner</div>
+          <div class="dinner-sub">In-Room Dining · S115 私人陽台 · 峽灣景觀晚餐</div>
+        </div>
+        <div class="dinner-time" style="background:#7B2FA8;">17:20</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- D8 Bergen -->
+  <div class="day-card" id="card-d8">
+    <div class="day-header" onclick="toggleCard('card-d8')">
+      <div class="day-badge" style="background:#8B1A1A;">
+        <div class="db-num">D8</div><div class="db-label">Day</div><div class="db-date">5/14<br>Wed</div>
+      </div>
+      <div class="day-summary">
+        <div class="ds-title">⚓ Bergen ⚠️</div>
+        <div class="ds-tags">
+          <span class="ds-tag" style="background:var(--red-bg);color:var(--red);">07:00–14:00 最早離港</span>
+        </div>
+      </div>
+      <div class="day-chevron">›</div>
+    </div>
+    <div class="day-body">
+      <div class="port-schedule">
+        <span class="ps-chip ps-arrive">⚓ 抵港 07:00</span>
+        <span class="ps-chip ps-depart" style="background:var(--red-bg);color:var(--red);">⛵ 離港 14:00</span>
+      </div>
+      <div class="warn-box">⚠️ 14:00 最早離港！請務必 <strong>13:15 前返船</strong>，安排行程請預留充裕時間。</div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">上岸</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">📍 <strong>布呂根 Bryggen</strong></div>
+          <div class="act-note">UNESCO 世界遺產 · 彩色漢薩商人木造建築群 · 碼頭步行 5 分鐘</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Bryggen+Bergen+Norway', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time"></div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">📍 <strong>魚市場 Fish Market</strong></div>
+          <div class="act-note">碼頭旁 · 鮭魚、海鮮湯必嚐</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Bergen+Fish+Market+Norway', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time"></div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">📍 <strong>Fløibanen 纜車</strong></div>
+          <div class="act-note">登 Fløyen 山頂俯瞰卑爾根灣全景</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Fløibanen+Bergen+Norway', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="dinner-row">
+        <div class="dinner-icon">🍽</div>
+        <div class="dinner-info"><div class="dinner-name">Crown Grill</div><div class="dinner-sub">Deck 7 · 已預訂</div></div>
+        <div class="dinner-time">17:30</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- D9 Sea Day -->
+  <div class="day-card" id="card-d9">
+    <div class="day-header" onclick="toggleCard('card-d9')">
+      <div class="day-badge" style="background:#1a3a5c;">
+        <div class="db-num">D9</div><div class="db-label">Day</div><div class="db-date">5/15<br>Thu</div>
+      </div>
+      <div class="day-summary">
+        <div class="ds-title">🌊 海上返航</div>
+        <div class="ds-tags"><span class="ds-tag tag-sea">全日在海</span></div>
+      </div>
+      <div class="day-chevron">›</div>
+    </div>
+    <div class="day-body">
+      <div class="port-schedule"><span class="ps-atsea">🌊 全日航行返回 Southampton</span></div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">全天</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main"><div class="act-label">Spa、泳池、表演秀，郵輪最後一夜</div></div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">晚些</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main"><div class="act-label">整理採購戰利品，打包行李</div></div>
+      </div>
+      <div class="dinner-row">
+        <div class="dinner-icon">🍽</div>
+        <div class="dinner-info"><div class="dinner-name">The Catch by Rudy</div><div class="dinner-sub">Deck 7 · 已預訂</div></div>
+        <div class="dinner-time">17:30</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end cruise -->
+
+
+<!-- ════════════════════════════════
+     TAB 3: 倫敦後段
+════════════════════════════════ -->
+<div class="section" id="sec-london2">
+  <div style="height:4px"></div>
+  <div class="section-hero">
+    <div class="sh-label">Part 3 · 倫敦後段</div>
+    <div class="sh-title">Conrad London<br>St. James</div>
+    <div class="sh-sub">5月16日 — 5月20日 · 4晚 · 皇家地帶核心</div>
+  </div>
+
+  <!-- D10 -->
+  <div class="day-card" id="card-d10">
+    <div class="day-header" onclick="toggleCard('card-d10')">
+      <div class="day-badge">
+        <div class="db-num">D10</div><div class="db-label">Day</div><div class="db-date">5/16<br>Fri</div>
+      </div>
+      <div class="day-summary">
+        <div class="ds-title">下船 · 入住 Conrad</div>
+        <div class="ds-tags"><span class="ds-tag tag-cruise">🚢 下船</span><span class="ds-tag tag-hotel">🏨 Conrad</span></div>
+      </div>
+      <div class="day-chevron">›</div>
+    </div>
+    <div class="day-body">
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">07:00</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main"><div class="act-label">⚓ <strong>抵達 Southampton 07:00</strong>，辦理下船手續</div></div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">早晨</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main"><div class="act-label">包車直赴倫敦（約 1.5–2 小時）</div></div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">中午</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">抵達 <strong>Conrad London St. James</strong>，行李寄存</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Conrad+London+St+James+Hotel', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">下午</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">漫步 <strong>St. James's Park</strong>，欣賞宮殿湖景</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=St+James%27s+Park+London', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">下午</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">📍 <strong>Fortnum & Mason</strong>（步行5分鐘）— 伴手禮首選</div>
+          <div class="act-note">🕐 <strong>營業時間：</strong>週一–六 10:00–21:00 · 週日 11:30–18:00<br>🚇 <strong>地鐵：</strong>Green Park 站（Jubilee / Victoria / Piccadilly Line）步行 5 分鐘</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Fortnum+and+Mason+London', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="tip-box">💡 Conrad St. James 步行可達<strong>白金漢宮、西敏寺、國會大廈、Trafalgar 廣場</strong>。</div>
+    </div>
+  </div>
+
+  <!-- D11 -->
+  <div class="day-card" id="card-d11">
+    <div class="day-header" onclick="toggleCard('card-d11')">
+      <div class="day-badge">
+        <div class="db-num">D11</div><div class="db-label">Day</div><div class="db-date">5/17<br>Sat</div>
+      </div>
+      <div class="day-summary">
+        <div class="ds-title">倫敦塔 · Tower Bridge · Tate Modern · 倫敦眼</div>
+        <div class="ds-tags"><span class="ds-tag tag-hotel">🗼 South Bank 全日</span></div>
+      </div>
+      <div class="day-chevron">›</div>
+    </div>
+    <div class="day-body">
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">09:30</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">📍 <strong>Tower of London 倫敦塔</strong></div>
+          <div class="act-note">皇冠珠寶 · 英格蘭衛兵 · 千年歷史 · 建議提前線上購票<br>🕐 <strong>營業時間：</strong>週二–六 09:00–17:30 · 週日–一 10:00–17:30<br>🚇 <strong>地鐵：</strong>Conrad 飯店步行 5 分鐘至 St. James's Park 站，搭 District / Circle Line → Tower Hill 站，約 20 分鐘，出站即見</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Tower+of+London', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="booking-card">
+        <div class="booking-header">
+          <span class="booking-icon">📅</span>
+          <span class="booking-title">倫敦塔 · 建議提前購票</span>
+          <span class="booking-status pending" id="bst-tower">待預訂</span>
+        </div>
+        <div class="booking-body">
+          <div class="booking-row">
+            <div class="booking-cb-wrap" onclick="toggleBooking('tower')">
+              <div class="booking-cb" id="bcb-tower"></div>
+              <span class="booking-cb-label">已購票</span>
+            </div>
+            <span class="booked-time-display" id="bdisp-tower"></span>
+          </div>
+          <div class="booking-time-wrap">
+            <span class="booking-time-label">入場時段：</span>
+            <select class="booking-time-select" id="bsel-tower" onchange="updateBookingTime('tower')">
+              <option value="">選擇時段</option>
+              <option>09:00</option><option>09:30</option><option>10:00</option>
+              <option>10:30</option><option>11:00</option><option>11:30</option>
+            </select>
+          </div>
+          <div class="booking-note">🌐 <a onclick="window.open('https://www.hrp.org.uk/tower-of-london/','_blank')">hrp.org.uk · Tower of London</a> · 現場票較貴，建議線上購買</div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div class="act-item">
+        <div class="act-time-col"></div>
+        <div class="act-cb" style="visibility:hidden"></div>
+        <div class="act-main"><div class="act-note" style="color:var(--gold);font-weight:600;">🚶 倫敦塔 → Tower Bridge：步行 5 分鐘</div></div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">上午</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">📍 <strong>Tower Bridge</strong></div>
+          <div class="act-note">泰晤士河畔拍照留影 · 步行至橋上免費 · 入內展覽需購票<br>🕐 <strong>展覽營業時間：</strong>09:30–18:00</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Tower+Bridge+London', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="act-item">
+        <div class="act-time-col"></div>
+        <div class="act-cb" style="visibility:hidden"></div>
+        <div class="act-main"><div class="act-note" style="color:var(--gold);font-weight:600;">🚇 Tower Hill → London Bridge（Circle Line 1 站）→ 步行 3 分鐘：約 10 分鐘</div></div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">午餐</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">📍 <strong>Borough Market</strong> 午餐</div>
+          <div class="act-note">英式派、起司、炸魚薯條攤、世界美食<br>🕐 <strong>營業時間：</strong>週一–四 10:00–17:00 · 週五 10:00–18:00 · 週六 08:00–17:00<br>🚇 <strong>地鐵：</strong>London Bridge 站（Northern / Jubilee Line），步行 3 分鐘</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Borough+Market+London', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="act-item">
+        <div class="act-time-col"></div>
+        <div class="act-cb" style="visibility:hidden"></div>
+        <div class="act-main"><div class="act-note" style="color:var(--gold);font-weight:600;">🚶 Borough Market → Tate Modern：沿河岸步行 10 分鐘</div></div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">下午</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">📍 <strong>Tate Modern</strong>（免費）</div>
+          <div class="act-note">世界最大現代藝術館 · 前火電廠改建 · Turbine Hall 必看大型裝置<br>🕐 <strong>營業時間：</strong>週日–四 10:00–18:00 · 週五–六 10:00–21:00<br>建議停留 1.5–2 小時</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Tate+Modern+London', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="act-item">
+        <div class="act-time-col"></div>
+        <div class="act-cb" style="visibility:hidden"></div>
+        <div class="act-main"><div class="act-note" style="color:var(--gold);font-weight:600;">🚶 Tate Modern → 倫敦眼：沿泰晤士河南岸步行 20 分鐘（風景極佳）</div></div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">傍晚</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">📍 <strong>倫敦眼 London Eye</strong>（建議提前購票，全程約 30 分鐘）</div>
+          <div class="act-note">🕐 <strong>營業時間：</strong>10:00–20:30（旺季可能延長）<br>🚇 返回：Waterloo 站（Northern / Jubilee / Bakerloo Line）搭車回飯店約 15 分鐘</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=London+Eye', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="booking-card">
+        <div class="booking-header">
+          <span class="booking-icon">📅</span>
+          <span class="booking-title">倫敦眼 London Eye · 建議提前購票</span>
+          <span class="booking-status pending" id="bst-eye11">待預訂</span>
+        </div>
+        <div class="booking-body">
+          <div class="booking-row">
+            <div class="booking-cb-wrap" onclick="toggleBooking('eye11')">
+              <div class="booking-cb" id="bcb-eye11"></div>
+              <span class="booking-cb-label">已購票</span>
+            </div>
+            <span class="booked-time-display" id="bdisp-eye11"></span>
+          </div>
+          <div class="booking-time-wrap">
+            <span class="booking-time-label">入場時段：</span>
+            <select class="booking-time-select" id="bsel-eye11" onchange="updateBookingTime('eye11')">
+              <option value="">選擇時段</option>
+              <option>15:00</option><option>15:30</option><option>16:00</option>
+              <option>16:30</option><option>17:00</option><option>17:30</option>
+              <option>18:00</option><option>18:30</option><option>19:00</option>
+            </select>
+          </div>
+          <div class="booking-note">🌐 <a onclick="window.open('https://www.londoneye.com','_blank')">londoneye.com</a> 線上購票可省排隊時間</div>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- D12 -->
+  <div class="day-card" id="card-d12">
+    <div class="day-header" onclick="toggleCard('card-d12')">
+      <div class="day-badge">
+        <div class="db-num">D12</div><div class="db-label">Day</div><div class="db-date">5/18<br>Sun</div>
+      </div>
+      <div class="day-summary">
+        <div class="ds-title">肯辛頓宮 · Piccadilly Circus · Covent Garden</div>
+        <div class="ds-tags"><span class="ds-tag tag-hotel">🏛🛍 宮殿購物</span></div>
+      </div>
+      <div class="day-chevron">›</div>
+    </div>
+    <div class="day-body">
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">10:00</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">📍 <strong>肯辛頓宮 Kensington Palace</strong></div>
+          <div class="act-note">戴安娜王妃故居 · State Rooms · 5月花園盛開最美<br>🕐 <strong>營業時間：</strong>10:00–18:00（最後入場 17:00）<br>🚇 <strong>地鐵：</strong>Conrad 飯店搭 District / Circle Line 至 High Street Kensington 站，步行約 10 分鐘，全程約 25 分鐘</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Kensington+Palace+London', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="booking-card">
+        <div class="booking-header">
+          <span class="booking-icon">📅</span>
+          <span class="booking-title">肯辛頓宮 · 建議預約入場時段</span>
+          <span class="booking-status pending" id="bst-kp">待預訂</span>
+        </div>
+        <div class="booking-body">
+          <div class="booking-row">
+            <div class="booking-cb-wrap" onclick="toggleBooking('kp')">
+              <div class="booking-cb" id="bcb-kp"></div>
+              <span class="booking-cb-label">已預訂</span>
+            </div>
+            <span class="booked-time-display" id="bdisp-kp"></span>
+          </div>
+          <div class="booking-time-wrap">
+            <span class="booking-time-label">入場時段：</span>
+            <select class="booking-time-select" id="bsel-kp" onchange="updateBookingTime('kp')">
+              <option value="">選擇時段</option>
+              <option>10:00</option><option>10:30</option><option>11:00</option>
+              <option>11:30</option><option>12:00</option><option>13:00</option>
+              <option>14:00</option><option>15:00</option>
+            </select>
+          </div>
+          <div class="booking-note">🌐 <a onclick="window.open('https://www.hrp.org.uk/kensington-palace/','_blank')">hrp.org.uk</a> 線上購票</div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">午餐</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">Hyde Park 野餐 或 Orangery 下午茶（需預訂）</div>
+          <div class="act-note">🕐 Orangery：10:00–18:00（夏季）· 肯辛頓宮旁步行 2 分鐘</div>
+        </div>
+      </div>
+      <div class="booking-card">
+        <div class="booking-header">
+          <span class="booking-icon">📅</span>
+          <span class="booking-title">Orangery 下午茶（如選擇，建議預約）</span>
+          <span class="booking-status pending" id="bst-orangery">待預訂</span>
+        </div>
+        <div class="booking-body">
+          <div class="booking-row">
+            <div class="booking-cb-wrap" onclick="toggleBooking('orangery')">
+              <div class="booking-cb" id="bcb-orangery"></div>
+              <span class="booking-cb-label">已預訂</span>
+            </div>
+            <span class="booked-time-display" id="bdisp-orangery"></span>
+          </div>
+          <div class="booking-time-wrap">
+            <span class="booking-time-label">預約時間：</span>
+            <select class="booking-time-select" id="bsel-orangery" onchange="updateBookingTime('orangery')">
+              <option value="">選擇時段</option>
+              <option>10:30</option><option>11:00</option><option>11:30</option>
+              <option>12:00</option><option>12:30</option><option>13:00</option>
+              <option>13:30</option><option>14:00</option><option>14:30</option>
+              <option>15:00</option><option>15:30</option><option>16:00</option>
+            </select>
+          </div>
+          <div class="booking-note">🌐 <a onclick="window.open('https://www.hrp.org.uk/kensington-palace/visit/the-orangery/','_blank')">hrp.org.uk · Orangery</a></div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div class="act-item">
+        <div class="act-time-col"></div>
+        <div class="act-cb" style="visibility:hidden"></div>
+        <div class="act-main"><div class="act-note" style="color:var(--gold);font-weight:600;">🚇 High Street Kensington → Piccadilly Circus：搭 District Line 至 Earl's Court，換 Piccadilly Line，約 20 分鐘</div></div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">下午</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">📍 <strong>Piccadilly Circus & Regent Street 逛街</strong></div>
+          <div class="act-note">Eros 噴泉留影 · 霓虹廣告招牌 · Regent Street：Zara、H&M、Uniqlo、Hamleys、Liberty London<br>🕐 <strong>營業時間：</strong>廣場全天 24hr；商店 10:00–20:00（週日約 12:00–18:00）<br>🚇 <strong>地鐵：</strong>Piccadilly Circus 站（Bakerloo / Piccadilly Line）</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Piccadilly+Circus+London', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="act-item">
+        <div class="act-time-col"></div>
+        <div class="act-cb" style="visibility:hidden"></div>
+        <div class="act-main"><div class="act-note" style="color:var(--gold);font-weight:600;">🚶 Piccadilly Circus → Covent Garden：步行 10 分鐘</div></div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">傍晚</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">📍 <strong>Covent Garden</strong> — 街頭藝人、特色精品店、週日市集</div>
+          <div class="act-note">🕐 <strong>營業時間：</strong>市集約 10:00–18:00；餐廳至深夜<br>🚇 <strong>返回：</strong>Covent Garden 站（Piccadilly Line）搭車回飯店約 15 分鐘</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Covent+Garden+London', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- D13 -->
+  <div class="day-card" id="card-d13">
+    <div class="day-header" onclick="toggleCard('card-d13')">
+      <div class="day-badge">
+        <div class="db-num">D13</div><div class="db-label">Day</div><div class="db-date">5/19<br>Mon</div>
+      </div>
+      <div class="day-summary">
+        <div class="ds-title">大英博物館 · Camden Market · Borough Market</div>
+        <div class="ds-tags"><span class="ds-tag tag-hotel">🏛🛍 平日市集日</span></div>
+      </div>
+      <div class="day-chevron">›</div>
+    </div>
+    <div class="day-body">
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">09:30</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">📍 <strong>大英博物館</strong>（開門即入，免費）</div>
+          <div class="act-note">羅塞塔石碑 · 埃及木乃伊廳 · 帕特農雕塑 · 中國瓷器館<br>🕐 <strong>營業時間：</strong>週六–四 09:30–18:00 · 週五 09:30–20:30<br>🚇 <strong>地鐵：</strong>Conrad 飯店搭 Jubilee Line 至 Waterloo，換 Bakerloo Line 至 Holborn，步行 5 分鐘，全程約 25 分鐘</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=British+Museum+London', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="booking-card">
+        <div class="booking-header">
+          <span class="booking-icon">📅</span>
+          <span class="booking-title">大英博物館 · 免費預約入場時段（可選）</span>
+          <span class="booking-status pending" id="bst-bm">待預訂</span>
+        </div>
+        <div class="booking-body">
+          <div class="booking-row">
+            <div class="booking-cb-wrap" onclick="toggleBooking('bm')">
+              <div class="booking-cb" id="bcb-bm"></div>
+              <span class="booking-cb-label">已預約時段</span>
+            </div>
+            <span class="booked-time-display" id="bdisp-bm"></span>
+          </div>
+          <div class="booking-time-wrap">
+            <span class="booking-time-label">入場時段：</span>
+            <select class="booking-time-select" id="bsel-bm" onchange="updateBookingTime('bm')">
+              <option value="">選擇時段</option>
+              <option>09:30</option><option>10:00</option><option>10:30</option>
+              <option>11:00</option><option>11:30</option><option>12:00</option>
+            </select>
+          </div>
+          <div class="booking-note">🌐 <a onclick="window.open('https://www.britishmuseum.org/visit','_blank')">britishmuseum.org</a> · 預約免費，但平日通常無需預約</div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">午餐</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label"><strong>Museum Street</strong> 咖啡廳或館內 Great Court Restaurant</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Museum+Street+London', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="act-item">
+        <div class="act-time-col"></div>
+        <div class="act-cb" style="visibility:hidden"></div>
+        <div class="act-main"><div class="act-note" style="color:var(--gold);font-weight:600;">🚇 Holborn → Camden Town：搭 Central Line 至 Tottenham Court Road，換 Northern Line 北行約 4 站，全程約 15 分鐘</div></div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">下午</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">📍 <strong>Camden Market</strong> — 古著、龐克、全球街食、運河風情</div>
+          <div class="act-note">Stables Market 古著 & 特色小店 · Camden Lock 美食市集 · Hawley Wharf 河畔餐廳<br>平日人少，慢慢逛！<br>🕐 <strong>營業時間：</strong>每日 10:00–18:00（部分餐廳更晚）<br>🚇 <strong>地鐵：</strong>Camden Town 站（Northern Line），出站步行 4 分鐘</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Camden+Market+London', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">傍晚</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">沿 <strong>Regent's Canal 運河步道</strong> 散步</div>
+          <div class="act-note">從 Camden Lock 步道漫步，氣氛悠閒，告別北倫敦</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Regent%27s+Canal+Camden+London', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="act-item">
+        <div class="act-time-col"></div>
+        <div class="act-cb" style="visibility:hidden"></div>
+        <div class="act-main"><div class="act-note" style="color:var(--gold);font-weight:600;">🚇 Camden Town → London Bridge：搭 Northern Line 南行約 8 站，全程約 18 分鐘</div></div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">晚些</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">📍 <strong>Borough Market 周邊晚餐</strong>（市集已關，但周邊餐廳熱鬧）</div>
+          <div class="act-note">Hawksmoor Borough、Padella 義大利麵、Flat Iron 等均在附近<br>🚇 <strong>返回：</strong>London Bridge 站（Jubilee / Northern Line）搭車回飯店約 15 分鐘</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Borough+Market+London', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- D14 -->
+  <div class="day-card" id="card-d14">
+    <div class="day-header" onclick="toggleCard('card-d14')">
+      <div class="day-badge" style="background:var(--green);">
+        <div class="db-num">D14</div><div class="db-label">Day</div><div class="db-date">5/20<br>Tue</div>
+      </div>
+      <div class="day-summary">
+        <div class="ds-title">國家美術館 · Trafalgar 廣場 · 返台</div>
+        <div class="ds-tags"><span class="ds-tag tag-fly">✈ 返台日</span></div>
+      </div>
+      <div class="day-chevron">›</div>
+    </div>
+    <div class="day-body">
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">上午</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main"><div class="act-label">退房，行李寄存，<strong>St. James's Park</strong> 最後漫步</div></div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">上午</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">📍 <strong>國家美術館</strong>（免費，步行15分鐘）</div>
+          <div class="act-note">達文西 · 梵谷 · 莫內 · 林布蘭，停留 1.5 小時<br>🕐 <strong>營業時間：</strong>週五–三 10:00–18:00 · 週四 10:00–21:00<br>🚇 <strong>地鐵：</strong>Charing Cross 站（Bakerloo / Northern Line）步行 5 分鐘，或 Leicester Square 站（Piccadilly / Northern Line）步行 5 分鐘</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=National+Gallery+London', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="booking-card">
+        <div class="booking-header">
+          <span class="booking-icon">📅</span>
+          <span class="booking-title">國家美術館 · 免費，無需預約，隨到隨入</span>
+          <span class="booking-status booked" id="bst-ng">✅ 免費入場</span>
+        </div>
+        <div class="booking-body">
+          <div class="booking-note">永久館藏免費，僅特展需購票。<br>🌐 <a onclick="window.open('https://www.nationalgallery.org.uk/visiting','_blank')">nationalgallery.org.uk</a></div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">午餐</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label"><strong>Trafalgar 廣場</strong>周邊或 Covent Garden</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Trafalgar+Square+London', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">下午</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main">
+          <div class="act-label">📍 <strong>Trafalgar 廣場</strong> 周邊漫步、咖啡、最後留影</div>
+          <div class="act-note">國家美術館出來即到，輕鬆告別倫敦，不趕時間</div>
+          <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Trafalgar+Square+London', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
+        </div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">17:30</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main"><div class="act-label">取行李，<strong>包車出發前往 Heathrow 機場</strong>（市區約 45–60 分鐘）</div></div>
+      </div>
+      <div class="act-item" onclick="toggleDone(this)">
+        <div class="act-time-col"><div class="act-time">~18:30</div></div>
+        <div class="act-cb"></div>
+        <div class="act-main"><div class="act-label">抵達機場，辦理 <strong>BR068 報到 & 通關</strong></div><div class="act-note">建議起飛前 3 小時完成報到</div></div>
+      </div>
+      <div class="flight-bar" style="margin:12px 16px 14px;">
+        <div class="fb-seg"><div class="fb-code">LHR</div><div class="fb-city">倫敦希斯洛</div></div>
+        <div class="fb-arrow"><div class="fb-num">✈ BR068 · 21:35</div><div class="fb-line"></div></div>
+        <div class="fb-seg"><div class="fb-code">TPE</div><div class="fb-city">台北桃園</div></div>
+      </div>
+      <div class="tip-box">💡 <strong>17:30 包車出發</strong>，BR068 21:35 起飛，時間相當充裕，可在機場免稅店從容購物。</div>
+    </div>
+  </div>
+
+</div><!-- end london2 -->
+
+
+<!-- ════════════════════════════════
+     TAB 4: 資訊
+════════════════════════════════ -->
+<div class="section" id="sec-info">
+  <div style="height:4px"></div>
+
+  <!-- 行程概覽 -->
+  <div class="info-card">
+    <div class="ic-title">📋 行程總覽</div>
+    <div class="ic-sub">TRIP AT A GLANCE</div>
+    <div class="ic-row"><span class="ic-key">去程航班</span><span class="ic-val">BR067 TPE → LHR</span></div>
+    <div class="ic-row"><span class="ic-key">回程航班</span><span class="ic-val">BR068 LHR → TPE 21:35</span></div>
+    <div class="ic-row"><span class="ic-key">郵輪</span><span class="ic-val">Sky Princess</span></div>
+    <div class="ic-row"><span class="ic-key">艙房</span><span class="ic-val" style="color:var(--gold);font-size:14px;">S115</span></div>
+    <div class="ic-row"><span class="ic-key">訂位編號</span><span class="ic-val" style="color:var(--gold);font-size:14px;">9JWL8W</span></div>
+    <div class="ic-row"><span class="ic-key">倫敦前段</span><span class="ic-val">Intercontinental Park Lane</span></div>
+    <div class="ic-row"><span class="ic-key">倫敦後段</span><span class="ic-val">Conrad London St. James</span></div>
+  </div>
+
+  <!-- 倫敦餐廳 -->
+  <div class="sec-label"><div class="sec-label-line"></div><div class="sec-label-text">倫敦餐廳推薦</div><div class="sec-label-line"></div></div>
+
+  <!-- 梅費爾 / Knightsbridge 區 (D2, D8/D12 附近) -->
+  <div style="font-size:11px;font-weight:700;color:var(--slate2);letter-spacing:1.5px;text-transform:uppercase;margin:4px 0 10px;">📍 梅費爾 · Knightsbridge 區（D2 / D12）</div>
+
+  <div class="rest-card">
+    <div class="rc-head"><div class="rc-name">The Mayfair Chippy Knightsbridge</div><div class="rc-cat">🐟 炸魚薯條 · Harrods 步行 2 分鐘</div></div>
+    <div class="rc-desc">倫敦最受歡迎的炸魚薯條餐廳之一，Harrods 對面，2024 年新開。酥脆不油膩的麵衣、鮮嫩鱈魚或黑線鱈，配 HP 醬或咖哩醬。無著裝要求，氣氛輕鬆。</div>
+    <div class="rc-actions">
+      <button class="rc-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=The+Mayfair+Chippy+Knightsbridge+London', '_blank')">📍 開啟地圖</button>
+    </div>
+  </div>
+
+  <div class="rest-card">
+    <div class="rc-head"><div class="rc-name">Goodman Mayfair</div><div class="rc-cat">🥩 頂級牛排 · 梅費爾</div></div>
+    <div class="rc-desc">倫敦最受好評的牛排餐廳之一，2008 年開業。美式寬敞皮革卡座、黑板每日特選部位，USDA 美國牛與英國在地牛並列。配菜 truffled mac & cheese 是招牌。輕鬆著裝即可。</div>
+    <div class="rc-actions">
+      <button class="rc-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Goodman+Mayfair+London', '_blank')">📍 開啟地圖</button>
+    </div>
+  </div>
+
+  <div class="rest-card">
+    <div class="rc-head"><div class="rc-name">Dishoom Kensington</div><div class="rc-cat">🍛 孟買風格印度料理 · High Street Kensington</div></div>
+    <div class="rc-desc">倫敦最受歡迎的印度餐廳，靈感來自孟買 1940 年代的伊朗咖啡廳。黑豆咖哩（Black Dal）慢燉 24 小時，搭配現烤 Naan 絕配。V&A 博物館附近，無著裝要求。建議提前訂位。</div>
+    <div class="rc-actions">
+      <button class="rc-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Dishoom+Kensington+London', '_blank')">📍 開啟地圖</button>
+    </div>
+  </div>
+
+  <div class="rest-card">
+    <div class="rc-head"><div class="rc-name">Flat Iron Mayfair</div><div class="rc-cat">🥩 平價優質牛排 · 梅費爾</div></div>
+    <div class="rc-desc">倫敦最超值牛排名店，招牌 Flat Iron 牛排 £14 起，採用英國在地農場三代傳承牛隻。附贈免費甜品，輕鬆隨性，完全無著裝要求。適合不想花大錢也想吃好牛排的選擇。</div>
+    <div class="rc-actions">
+      <button class="rc-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Flat+Iron+Mayfair+London', '_blank')">📍 開啟地圖</button>
+    </div>
+  </div>
+
+  <!-- Covent Garden / Soho 區 (D11, D13 附近) -->
+  <div style="font-size:11px;font-weight:700;color:var(--slate2);letter-spacing:1.5px;text-transform:uppercase;margin:16px 0 10px;">📍 Covent Garden · Soho 區（D11 / D13）</div>
+
+  <div class="rest-card">
+    <div class="rc-head"><div class="rc-name">Hawksmoor Seven Dials</div><div class="rc-cat">🥩 英國最佳牛排 · Covent Garden</div></div>
+    <div class="rc-desc">倫敦牛排界的傳奇，英國在地飼養牛隻、Josper 炭爐燒烤，份量以重量計算。週一至六午間 £19 牛排套餐超值。無需正裝，皮革深色木裝潢，氣氛絕佳。強烈建議訂位。</div>
+    <div class="rc-actions">
+      <button class="rc-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Hawksmoor+Seven+Dials+London', '_blank')">📍 開啟地圖</button>
+    </div>
+    <div class="booking-card" style="margin:0 0 0 0;border-radius:0 0 var(--radius) var(--radius);">
+      <div class="booking-header">
+        <span class="booking-icon">📅</span>
+        <span class="booking-title">Hawksmoor Seven Dials · 強烈建議提前訂位</span>
+        <span class="booking-status pending" id="bst-hawk">待預訂</span>
+      </div>
+      <div class="booking-body">
+        <div class="booking-row">
+          <div class="booking-cb-wrap" onclick="toggleBooking('hawk')">
+            <div class="booking-cb" id="bcb-hawk"></div>
+            <span class="booking-cb-label">已訂位</span>
+          </div>
+          <span class="booked-time-display" id="bdisp-hawk"></span>
+        </div>
+        <div class="booking-time-wrap">
+          <span class="booking-time-label">訂位時間：</span>
+          <select class="booking-time-select" id="bsel-hawk" onchange="updateBookingTime('hawk')">
+            <option value="">選擇時段</option>
+            <option>12:00</option><option>12:30</option><option>13:00</option><option>13:30</option>
+            <option>18:00</option><option>18:30</option><option>19:00</option><option>19:30</option>
+            <option>20:00</option><option>20:30</option>
+          </select>
+        </div>
+        <div class="booking-note">🌐 <a onclick="window.open('https://thehawksmoor.com/locations/seven-dials/','_blank')">thehawksmoor.com</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rest-card">
+    <div class="rc-head"><div class="rc-name">Din Tai Fung Covent Garden</div><div class="rc-cat">🥟 港式 / 台灣小籠包 · Covent Garden</div></div>
+    <div class="rc-desc">全球最知名小籠包品牌，倫敦第一家分店設於 Covent Garden。湯汁飽滿的小籠包、雞湯麵、各式港點，連獲英國金筷獎「最佳餃子」兩年。無著裝要求，建議訂位。</div>
+    <div class="rc-actions">
+      <button class="rc-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Din+Tai+Fung+Covent+Garden+London', '_blank')">📍 開啟地圖</button>
+    </div>
+    <div class="booking-card" style="margin:0 0 0 0;border-radius:0 0 var(--radius) var(--radius);">
+      <div class="booking-header">
+        <span class="booking-icon">📅</span>
+        <span class="booking-title">Din Tai Fung · 建議訂位</span>
+        <span class="booking-status pending" id="bst-dtf">待預訂</span>
+      </div>
+      <div class="booking-body">
+        <div class="booking-row">
+          <div class="booking-cb-wrap" onclick="toggleBooking('dtf')">
+            <div class="booking-cb" id="bcb-dtf"></div>
+            <span class="booking-cb-label">已訂位</span>
+          </div>
+          <span class="booked-time-display" id="bdisp-dtf"></span>
+        </div>
+        <div class="booking-time-wrap">
+          <span class="booking-time-label">訂位時間：</span>
+          <select class="booking-time-select" id="bsel-dtf" onchange="updateBookingTime('dtf')">
+            <option value="">選擇時段</option>
+            <option>12:00</option><option>12:30</option><option>13:00</option><option>13:30</option>
+            <option>18:00</option><option>18:30</option><option>19:00</option><option>19:30</option>
+            <option>20:00</option>
+          </select>
+        </div>
+        <div class="booking-note">🌐 <a onclick="window.open('https://www.dintaifunguk.com','_blank')">dintaifunguk.com</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rest-card">
+    <div class="rc-head"><div class="rc-name">Dim Sum Library</div><div class="rc-cat">🍢 現代港式飲茶 · Covent Garden</div></div>
+    <div class="rc-desc">香港 Aqua 集團旗下，2024 年在 Covent Garden 開幕，近 50 款點心全日供應。黑松露蝦餃、Dan Dan 小籠包、BBQ 豬肉包，開放式廚房現做，氣氛活潑。無著裝要求。</div>
+    <div class="rc-actions">
+      <button class="rc-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Dim+Sum+Library+Covent+Garden+London', '_blank')">📍 開啟地圖</button>
+    </div>
+    <div class="booking-card" style="margin:0 0 0 0;border-radius:0 0 var(--radius) var(--radius);">
+      <div class="booking-header">
+        <span class="booking-icon">📅</span>
+        <span class="booking-title">Dim Sum Library · 建議訂位</span>
+        <span class="booking-status pending" id="bst-dsl">待預訂</span>
+      </div>
+      <div class="booking-body">
+        <div class="booking-row">
+          <div class="booking-cb-wrap" onclick="toggleBooking('dsl')">
+            <div class="booking-cb" id="bcb-dsl"></div>
+            <span class="booking-cb-label">已訂位</span>
+          </div>
+          <span class="booked-time-display" id="bdisp-dsl"></span>
+        </div>
+        <div class="booking-time-wrap">
+          <span class="booking-time-label">訂位時間：</span>
+          <select class="booking-time-select" id="bsel-dsl" onchange="updateBookingTime('dsl')">
+            <option value="">選擇時段</option>
+            <option>12:00</option><option>12:30</option><option>13:00</option><option>13:30</option>
+            <option>18:00</option><option>18:30</option><option>19:00</option><option>19:30</option>
+            <option>20:00</option>
+          </select>
+        </div>
+        <div class="booking-note">🌐 <a onclick="window.open('https://dimsumlibrarycoventgarden.com','_blank')">dimsumlibrarycoventgarden.com</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rest-card">
+    <div class="rc-head"><div class="rc-name">Tandoor Chop House</div><div class="rc-cat">🍖 印度烤肉排餐 · Covent Garden</div></div>
+    <div class="rc-desc">將北印度烤窯（Tandoor）與英式 Chop House 排餐完美結合，招牌羊排、Seekh Kebab、印度香料醃製牛排一絕。活潑輕鬆氛圍，完全無著裝要求，肉食愛好者必訪。</div>
+    <div class="rc-actions">
+      <button class="rc-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Tandoor+Chop+House+Covent+Garden+London', '_blank')">📍 開啟地圖</button>
+    </div>
+  </div>
+
+  <div class="rest-card">
+    <div class="rc-head"><div class="rc-name">Dishoom Covent Garden</div><div class="rc-cat">🍛 孟買風格印度料理 · Covent Garden</div></div>
+    <div class="rc-desc">最受遊客喜愛的 Dishoom 分店，排隊一絕但值得。黑豆咖哩、Chicken Ruby 咖哩、各式 Naan。入選 2025 年英國印度美食指南，氣氛熱鬧，無著裝要求。</div>
+    <div class="rc-actions">
+      <button class="rc-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Dishoom+Covent+Garden+London', '_blank')">📍 開啟地圖</button>
+    </div>
+  </div>
+
+  <!-- Westminster / St. James's 區 (D10, D14 附近) -->
+  <div style="font-size:11px;font-weight:700;color:var(--slate2);letter-spacing:1.5px;text-transform:uppercase;margin:16px 0 10px;">📍 Westminster · St. James's 區（D10 / D14）</div>
+
+  <div class="rest-card">
+    <div class="rc-head"><div class="rc-name">Cinnamon Bazaar</div><div class="rc-cat">🍛 現代印度街頭料理 · Covent Garden / Westminster</div></div>
+    <div class="rc-desc">靈感來自印度歷史貿易路線上的市集，融合 Afghan、Punjab、Lahore 等地風味，chaats、bazaar 小食豐富多彩。色彩繽紛裝潢，無著裝要求，非常適合輕鬆晚餐。</div>
+    <div class="rc-actions">
+      <button class="rc-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Cinnamon+Bazaar+London', '_blank')">📍 開啟地圖</button>
+    </div>
+  </div>
+
+  <div class="rest-card">
+    <div class="rc-head"><div class="rc-name">Blacklock Covent Garden</div><div class="rc-cat">🥩 英式 Chop House 排餐 · Soho / Covent Garden</div></div>
+    <div class="rc-desc">以 Cornwall Philip Warren 農場直供肉排為主打，薄切肋骨排配酸種麵包吸滿肉汁，£27 All-In 套餐超值划算。鏡子上有趣的肉食幽默標語，隨興輕鬆氛圍，完全無著裝要求。</div>
+    <div class="rc-actions">
+      <button class="rc-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Blacklock+Covent+Garden+London', '_blank')">📍 開啟地圖</button>
+    </div>
+  </div>
+
+  <div class="rest-card">
+    <div class="rc-head"><div class="rc-name">Yauatcha Soho</div><div class="rc-cat">🍢 精緻港式飲茶 · Soho</div></div>
+    <div class="rc-desc">全日供應港式點心，松茸餃、鹿肉酥皮餃是招牌，甜點亦是一絕。燈光昏黃氣氛優美，無著裝要求，輕鬆隨意的精緻港式體驗。建議提前訂位。</div>
+    <div class="rc-actions">
+      <button class="rc-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Yauatcha+Soho+London', '_blank')">📍 開啟地圖</button>
+    </div>
+  </div>
+
+  <!-- Tower Bridge 區 (D13 附近) -->
+  <div style="font-size:11px;font-weight:700;color:var(--slate2);letter-spacing:1.5px;text-transform:uppercase;margin:16px 0 10px;">📍 Tower Bridge · Southbank 區（D13）</div>
+
+  <div class="rest-card">
+    <div class="rc-head"><div class="rc-name">Hawksmoor Knightsbridge</div><div class="rc-cat">🥩 英國最佳牛排 · Knightsbridge</div></div>
+    <div class="rc-desc">Hawksmoor 最新分店，緊鄰 Harrods。與 Seven Dials 同樣水準的英國在地牛排，配菜 Tunworth Mash 起司薯泥是明星。地點極佳，週間午餐套餐超值。無著裝要求。</div>
+    <div class="rc-actions">
+      <button class="rc-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Hawksmoor+Knightsbridge+London', '_blank')">📍 開啟地圖</button>
+    </div>
+  </div>
+
+  <div class="rest-card">
+    <div class="rc-head"><div class="rc-name">Borough Market 周邊街食</div><div class="rc-cat">🍺 英式街頭美食 · London Bridge</div></div>
+    <div class="rc-desc">D13 Borough Market 就是最好的午餐選擇！Kappacasein 烤起司吐司、Gujarati Rasoi 素食咖哩、Monmouth Coffee 名咖啡、Turnips 炸魚薯條攤，每攤都是排隊名物。週一至六開放。</div>
+    <div class="rc-actions">
+      <button class="rc-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Borough+Market+London', '_blank')">📍 開啟地圖</button>
+    </div>
+  </div>
+
+  <!-- 旅行提醒 -->
+  <div class="sec-label"><div class="sec-label-line"></div><div class="sec-label-text">旅行提醒</div><div class="sec-label-line"></div></div>
+
+  <div class="note-grid">
+    <div class="note-card">
+      <div class="nc-icon">🎟</div>
+      <div class="nc-title">建議提前預訂</div>
+      <div class="nc-body">
+        <strong>倫敦眼</strong> — 線上購票免排隊<br>
+        <strong>肯辛頓宮</strong> — 建議預約入場時段<br>
+        <strong>倫敦塔</strong> — 建議線上購票<br>
+        <strong>Hawksmoor</strong> — 熱門需提前訂位<br>
+        <strong>Dishoom</strong> — 開門前排隊或提前訂位<br>
+        <strong>Din Tai Fung</strong> — 建議訂位<br>
+        <strong>Dim Sum Library</strong> — 建議訂位
+      </div>
+    </div>
+    <div class="note-card">
+      <div class="nc-icon">🚇</div>
+      <div class="nc-title">倫敦交通</div>
+      <div class="nc-body">非接觸信用卡感應搭地鐵最方便，無需另買票。<br>機場 ↔ 市區：Heathrow Express（Paddington 約 15 分鐘）或包車。</div>
+    </div>
+    <div class="note-card">
+      <div class="nc-icon">💷</div>
+      <div class="nc-title">貨幣</div>
+      <div class="nc-body">英鎊（GBP）/ 挪威克朗（NOK）。兩地幾乎全面接受信用卡，挪威消費高昂，需心理準備。</div>
+    </div>
+    <div class="note-card">
+      <div class="nc-icon">🌦</div>
+      <div class="nc-title">5月天氣</div>
+      <div class="nc-body">倫敦 10–18°C，偶有陣雨，薄外套必備。挪威峽灣早晚低至 5°C，防風防水外套不可少。</div>
+    </div>
+    <div class="note-card">
+      <div class="nc-icon">⚓</div>
+      <div class="nc-title">郵輪提醒</div>
+      <div class="nc-body">
+        <strong>Bergen 14:00 最早離港</strong> → 13:15 前返船<br>
+        <strong>Olden 17:00 離港</strong> → 16:15 前返船<br>
+        各港口建議比截止時間早 30–45 分鐘返船<br>
+        備正式服裝出席 Gala Night
+      </div>
+    </div>
+    <div class="note-card">
+      <div class="nc-icon">🎁</div>
+      <div class="nc-title">伴手禮</div>
+      <div class="nc-body">倫敦：Fortnum & Mason 茶葉餅乾、Harrods 自有品牌、M&S 食品。<br>挪威：Dale of Norway 手工毛衣、彩色沙丁魚罐頭、鮭魚乾。</div>
+    </div>
+  </div>
+
+  <div style="height:8px"></div>
+
+</div><!-- end info -->
+
+<!-- Scroll to top -->
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// ── TAB SWITCHING ──
+function showTab(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('sec-' + name).classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── CARD TOGGLE ──
+function toggleCard(id) {
+  const card = document.getElementById(id);
+  card.classList.toggle('open');
+}
+
+// ── CHECKBOX DONE ──
+function toggleDone(el) {
+  // prevent toggle if clicking a link
+  if (event.target.tagName === 'A' || event.target.closest('a')) return;
+  el.classList.toggle('done');
+  saveProgress();
+}
+
+// ── PERSIST PROGRESS ──
+function saveProgress() {
+  const done = [];
+  document.querySelectorAll('.act-item.done').forEach((el, i) => {
+    done.push(el.dataset.id || getIndex(el));
+  });
+  try { localStorage.setItem('trip_done', JSON.stringify(done)); } catch(e){}
+}
+
+function getIndex(el) {
+  return Array.from(document.querySelectorAll('.act-item')).indexOf(el);
+}
+
+function loadProgress() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('trip_done') || '[]');
+    const items = document.querySelectorAll('.act-item');
+    saved.forEach(idx => { if (items[idx]) items[idx].classList.add('done'); });
+  } catch(e) {}
+}
+
+// ── SCROLL TOP ──
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('scrollTop');
+  btn.classList.toggle('show', window.scrollY > 300);
+});
+
+// ── BOOKING SYSTEM ──
+function toggleBooking(id) {
+  const cb   = document.getElementById('bcb-' + id);
+  const stat = document.getElementById('bst-' + id);
+  const disp = document.getElementById('bdisp-' + id);
+  const sel  = document.getElementById('bsel-' + id);
+  const cust = document.getElementById('bcust-' + id);
+
+  cb.classList.toggle('checked');
+  const isBooked = cb.classList.contains('checked');
+  stat.textContent = isBooked ? '✅ 已預訂' : '待預訂';
+  stat.className   = 'booking-status ' + (isBooked ? 'booked' : 'pending');
+
+  if (disp) {
+    const val = sel ? sel.value : (cust ? cust.value : '');
+    disp.textContent = val ? '⏰ ' + val : '';
+    disp.style.display = (isBooked && val) ? 'inline-block' : 'none';
+  }
+  saveBookings();
+}
+
+function updateBookingTime(id) {
+  const cb   = document.getElementById('bcb-' + id);
+  const disp = document.getElementById('bdisp-' + id);
+  const sel  = document.getElementById('bsel-' + id);
+  const cust = document.getElementById('bcust-' + id);
+  if (!disp) return;
+  const val = sel ? sel.value : (cust ? cust.value : '');
+  if (cb && cb.classList.contains('checked')) {
+    disp.textContent = val ? '⏰ ' + val : '';
+    disp.style.display = val ? 'inline-block' : 'none';
+  }
+  saveBookings();
+}
+
+function saveBookings() {
+  const data = {};
+  document.querySelectorAll('[id^="bcb-"]').forEach(cb => {
+    const id = cb.id.replace('bcb-','');
+    const sel  = document.getElementById('bsel-'  + id);
+    const cust = document.getElementById('bcust-' + id);
+    data[id] = {
+      checked: cb.classList.contains('checked'),
+      time: sel ? sel.value : (cust ? cust.value : '')
+    };
+  });
+  try { localStorage.setItem('trip_bookings', JSON.stringify(data)); } catch(e){}
+}
+
+function loadBookings() {
+  try {
+    const data = JSON.parse(localStorage.getItem('trip_bookings') || '{}');
+    Object.entries(data).forEach(([id, v]) => {
+      const cb   = document.getElementById('bcb-'   + id);
+      const stat = document.getElementById('bst-'   + id);
+      const disp = document.getElementById('bdisp-' + id);
+      const sel  = document.getElementById('bsel-'  + id);
+      const cust = document.getElementById('bcust-' + id);
+      if (!cb) return;
+      if (v.checked) {
+        cb.classList.add('checked');
+        if (stat) { stat.textContent = '✅ 已預訂'; stat.className = 'booking-status booked'; }
+      }
+      if (v.time) {
+        if (sel)  sel.value  = v.time;
+        if (cust) cust.value = v.time;
+        if (disp && v.checked) {
+          disp.textContent = '⏰ ' + v.time;
+          disp.style.display = 'inline-block';
+        }
+      }
+    });
+  } catch(e){}
+}
+
+// ── INIT ──
+loadProgress();
+loadBookings();
+
+</script>
+</body>
+</html>
