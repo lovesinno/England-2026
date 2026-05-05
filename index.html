@@ -391,7 +391,7 @@ body {
 
 /* ── SCROLL TOP ── */
 .scroll-top {
-  position:fixed; bottom:80px; right:16px;
+  position:fixed; bottom:80px; right:16px; z-index:200;
   width:40px; height:40px; border-radius:50%;
   background:var(--navy); color:var(--gold2);
   border:none; font-size:18px; cursor:pointer;
@@ -421,6 +421,36 @@ body {
 .pb-label { display:flex; justify-content:space-between; font-size:11px; color:var(--slate); margin-bottom:6px; }
 .pb-track { height:5px; background:var(--border); border-radius:3px; overflow:hidden; }
 .pb-fill  { height:100%; background:var(--gold); border-radius:3px; transition:width .4s; }
+
+/* ── REST SLOT (dynamic dinner injected from restaurant page) ── */
+.rest-slot { }
+.rest-slot-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 16px;
+  background: linear-gradient(135deg, #FDF8EE, #FFF9F0);
+  border-top: 2px solid rgba(200,169,81,.3);
+  border-radius: 0 0 var(--radius) var(--radius);
+  animation: fadeSlot .3s ease;
+}
+@keyframes fadeSlot {
+  from { opacity:0; transform:translateY(-4px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.rsi-icon { font-size:22px; flex-shrink:0; }
+.rsi-info { flex:1; }
+.rsi-name { font-size:13px; font-weight:700; color:var(--navy); }
+.rsi-sub  { font-size:11px; color:var(--slate); margin-top:2px; }
+.rsi-time {
+  background:var(--gold); color:white;
+  font-size:11px; font-weight:700;
+  padding:4px 11px; border-radius:20px;
+  letter-spacing:.5px; flex-shrink:0;
+}
+.rsi-remove {
+  background:none; border:none; color:var(--slate2);
+  font-size:20px; cursor:pointer; padding:0 2px;
+  flex-shrink:0; line-height:1; font-weight:300;
+}
 
 /* ── BOOKING CARD ── */
 .booking-card {
@@ -503,29 +533,11 @@ body {
   </div>
 </div>
 
-<!-- BOTTOM NAV -->
-<nav class="bottom-nav">
-  <button class="nav-tab active" onclick="showTab('london1')" id="tab-london1">
-    <span class="icon">🏰</span><span>倫敦前段</span>
-    <div class="nav-tab-dot"></div>
-  </button>
-  <button class="nav-tab" onclick="showTab('cruise')" id="tab-cruise">
-    <span class="icon">🚢</span><span>郵輪</span>
-    <div class="nav-tab-dot"></div>
-  </button>
-  <button class="nav-tab" onclick="showTab('london2')" id="tab-london2">
-    <span class="icon">👑</span><span>倫敦後段</span>
-    <div class="nav-tab-dot"></div>
-  </button>
-  <button class="nav-tab" onclick="showTab('info')" id="tab-info">
-    <span class="icon">📋</span><span>資訊</span>
-    <div class="nav-tab-dot"></div>
-  </button>
-</nav>
 
 <!-- ════════════════════════════════
      TAB 1: 倫敦前段
 ════════════════════════════════ -->
+<div id="content-wrap">
 <div class="section active" id="sec-london1">
 
   <div style="height:4px"></div>
@@ -671,6 +683,8 @@ body {
         </div>
       </div>
       <div class="tip-box">💡 順著身體調整時差，才能以最佳狀態迎接郵輪旅程。</div>
+
+      <div id="rest-slot-d2" class="rest-slot"></div>
     </div>
   </div>
 
@@ -1120,6 +1134,8 @@ body {
         </div>
       </div>
       <div class="tip-box">💡 Conrad St. James 步行可達<strong>白金漢宮、西敏寺、國會大廈、Trafalgar 廣場</strong>。</div>
+
+      <div id="rest-slot-d10" class="rest-slot"></div>
     </div>
   </div>
 
@@ -1256,6 +1272,8 @@ body {
       </div>
         </div>
       </div>
+
+      <div id="rest-slot-d11" class="rest-slot"></div>
     </div>
   </div>
 
@@ -1374,6 +1392,8 @@ body {
           <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Covent+Garden+London', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
         </div>
       </div>
+
+      <div id="rest-slot-d12" class="rest-slot"></div>
     </div>
   </div>
 
@@ -1471,6 +1491,8 @@ body {
           <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Borough+Market+London', '_blank')"><span class="map-icon">📍</span>開啟地圖</button>
         </div>
       </div>
+
+      <div id="rest-slot-d13" class="rest-slot"></div>
     </div>
   </div>
 
@@ -1546,6 +1568,8 @@ body {
         <div class="fb-seg"><div class="fb-code">TPE</div><div class="fb-city">台北桃園</div></div>
       </div>
       <div class="tip-box">💡 <strong>17:30 包車出發</strong>，BR068 21:35 起飛，時間相當充裕，可在機場免稅店從容購物。</div>
+
+      <div id="rest-slot-d14" class="rest-slot"></div>
     </div>
   </div>
 
@@ -1626,15 +1650,25 @@ body {
       </div>
       <div class="booking-body">
         <div class="booking-row">
-          <div class="booking-cb-wrap" onclick="toggleBooking('hawk')">
+          <div class="booking-cb-wrap" onclick="toggleRestBooking('hawk')">
             <div class="booking-cb" id="bcb-hawk"></div>
             <span class="booking-cb-label">已訂位</span>
           </div>
           <span class="booked-time-display" id="bdisp-hawk"></span>
         </div>
         <div class="booking-time-wrap">
-          <span class="booking-time-label">訂位時間：</span>
-          <select class="booking-time-select" id="bsel-hawk" onchange="updateBookingTime('hawk')">
+          <span class="booking-time-label">日期：</span>
+          <select class="booking-time-select" id="bdate-hawk" onchange="syncRestToDay('hawk')">
+            <option value="">選擇日期</option>
+            <option value="d11">5/17（日）D11 South Bank</option>
+            <option value="d12">5/18（一）D12 肯辛頓宮</option>
+            <option value="d13">5/19（二）D13 大英博物館</option>
+            <option value="d14">5/20（三）D14 返台日</option>
+          </select>
+        </div>
+        <div class="booking-time-wrap">
+          <span class="booking-time-label">時間：</span>
+          <select class="booking-time-select" id="bsel-hawk" onchange="syncRestToDay('hawk')">
             <option value="">選擇時段</option>
             <option>12:00</option><option>12:30</option><option>13:00</option><option>13:30</option>
             <option>18:00</option><option>18:30</option><option>19:00</option><option>19:30</option>
@@ -1660,15 +1694,25 @@ body {
       </div>
       <div class="booking-body">
         <div class="booking-row">
-          <div class="booking-cb-wrap" onclick="toggleBooking('dtf')">
+          <div class="booking-cb-wrap" onclick="toggleRestBooking('dtf')">
             <div class="booking-cb" id="bcb-dtf"></div>
             <span class="booking-cb-label">已訂位</span>
           </div>
           <span class="booked-time-display" id="bdisp-dtf"></span>
         </div>
         <div class="booking-time-wrap">
-          <span class="booking-time-label">訂位時間：</span>
-          <select class="booking-time-select" id="bsel-dtf" onchange="updateBookingTime('dtf')">
+          <span class="booking-time-label">日期：</span>
+          <select class="booking-time-select" id="bdate-dtf" onchange="syncRestToDay('dtf')">
+            <option value="">選擇日期</option>
+            <option value="d11">5/17（日）D11 South Bank</option>
+            <option value="d12">5/18（一）D12 肯辛頓宮</option>
+            <option value="d13">5/19（二）D13 大英博物館</option>
+            <option value="d14">5/20（三）D14 返台日</option>
+          </select>
+        </div>
+        <div class="booking-time-wrap">
+          <span class="booking-time-label">時間：</span>
+          <select class="booking-time-select" id="bsel-dtf" onchange="syncRestToDay('dtf')">
             <option value="">選擇時段</option>
             <option>12:00</option><option>12:30</option><option>13:00</option><option>13:30</option>
             <option>18:00</option><option>18:30</option><option>19:00</option><option>19:30</option>
@@ -1694,19 +1738,30 @@ body {
       </div>
       <div class="booking-body">
         <div class="booking-row">
-          <div class="booking-cb-wrap" onclick="toggleBooking('dsl')">
+          <div class="booking-cb-wrap" onclick="toggleRestBooking('dsl')">
             <div class="booking-cb" id="bcb-dsl"></div>
             <span class="booking-cb-label">已訂位</span>
           </div>
           <span class="booked-time-display" id="bdisp-dsl"></span>
         </div>
         <div class="booking-time-wrap">
-          <span class="booking-time-label">訂位時間：</span>
-          <select class="booking-time-select" id="bsel-dsl" onchange="updateBookingTime('dsl')">
+          <span class="booking-time-label">日期：</span>
+          <select class="booking-time-select" id="bdate-dsl" onchange="syncRestToDay('dsl')">
+            <option value="">選擇日期</option>
+            <option value="d11">5/17（日）D11 South Bank</option>
+            <option value="d12">5/18（一）D12 肯辛頓宮</option>
+            <option value="d13">5/19（二）D13 大英博物館</option>
+            <option value="d14">5/20（三）D14 返台日</option>
+          </select>
+        </div>
+        <div class="booking-time-wrap">
+          <span class="booking-time-label">時間：</span>
+          <select class="booking-time-select" id="bsel-dsl" onchange="syncRestToDay('dsl')">
             <option value="">選擇時段</option>
-            <option>12:00</option><option>12:30</option><option>13:00</option><option>13:30</option>
-            <option>18:00</option><option>18:30</option><option>19:00</option><option>19:30</option>
-            <option>20:00</option>
+            <option>11:30</option><option>12:00</option><option>12:30</option>
+            <option>13:00</option><option>13:30</option><option>14:00</option>
+            <option>18:00</option><option>18:30</option><option>19:00</option>
+            <option>19:30</option><option>20:00</option>
           </select>
         </div>
         <div class="booking-note">🌐 <a onclick="window.open('https://dimsumlibrarycoventgarden.com','_blank')">dimsumlibrarycoventgarden.com</a></div>
@@ -1822,12 +1877,38 @@ body {
       <div class="nc-icon">🎁</div>
       <div class="nc-title">伴手禮</div>
       <div class="nc-body">倫敦：Fortnum & Mason 茶葉餅乾、Harrods 自有品牌、M&S 食品。<br>挪威：Dale of Norway 手工毛衣、彩色沙丁魚罐頭、鮭魚乾。</div>
-    </div>
+
+
+
+
+
+</div>
   </div>
 
   <div style="height:8px"></div>
 
 </div><!-- end info -->
+</div><!-- end content-wrap -->
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <button class="nav-tab active" onclick="showTab('london1')" id="tab-london1">
+    <span class="icon">🏰</span><span>倫敦前段</span>
+    <div class="nav-tab-dot"></div>
+  </button>
+  <button class="nav-tab" onclick="showTab('cruise')" id="tab-cruise">
+    <span class="icon">🚢</span><span>郵輪</span>
+    <div class="nav-tab-dot"></div>
+  </button>
+  <button class="nav-tab" onclick="showTab('london2')" id="tab-london2">
+    <span class="icon">👑</span><span>倫敦後段</span>
+    <div class="nav-tab-dot"></div>
+  </button>
+  <button class="nav-tab" onclick="showTab('info')" id="tab-info">
+    <span class="icon">📋</span><span>資訊</span>
+    <div class="nav-tab-dot"></div>
+  </button>
+</nav>
+
 
 <!-- Scroll to top -->
 <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
@@ -1837,9 +1918,10 @@ body {
 function showTab(name) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('sec-' + name).classList.add('active');
+  const target = document.getElementById('sec-' + name);
   document.getElementById('tab-' + name).classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  target.classList.add('active');
+  target.scrollIntoView({ behavior: 'instant', block: 'start' });
 }
 
 // ── CARD TOGGLE ──
@@ -1883,24 +1965,24 @@ window.addEventListener('scroll', () => {
   btn.classList.toggle('show', window.scrollY > 300);
 });
 
-// ── BOOKING SYSTEM ──
+// ── RESTAURANT CONFIG ──
+const REST_CONFIG = {
+  hawk: { name:'Hawksmoor Seven Dials', icon:'🥩', url:'https://thehawksmoor.com/locations/seven-dials/' },
+  dtf:  { name:'Din Tai Fung', icon:'🥟', url:'https://www.dintaifunguk.com' },
+  dsl:  { name:'Dim Sum Library', icon:'🍢', url:'https://dimsumlibrarycoventgarden.com' },
+};
+
+// ── STANDARD BOOKING (non-restaurant) ──
 function toggleBooking(id) {
   const cb   = document.getElementById('bcb-' + id);
   const stat = document.getElementById('bst-' + id);
   const disp = document.getElementById('bdisp-' + id);
   const sel  = document.getElementById('bsel-' + id);
-  const cust = document.getElementById('bcust-' + id);
-
+  if (!cb) return;
   cb.classList.toggle('checked');
   const isBooked = cb.classList.contains('checked');
-  stat.textContent = isBooked ? '✅ 已預訂' : '待預訂';
-  stat.className   = 'booking-status ' + (isBooked ? 'booked' : 'pending');
-
-  if (disp) {
-    const val = sel ? sel.value : (cust ? cust.value : '');
-    disp.textContent = val ? '⏰ ' + val : '';
-    disp.style.display = (isBooked && val) ? 'inline-block' : 'none';
-  }
+  if (stat) { stat.textContent = isBooked ? '✅ 已預訂' : '待預訂'; stat.className = 'booking-status ' + (isBooked ? 'booked' : 'pending'); }
+  if (disp) { const val = sel ? sel.value : ''; disp.textContent = val ? '⏰ ' + val : ''; disp.style.display = (isBooked && val) ? 'inline-block' : 'none'; }
   saveBookings();
 }
 
@@ -1908,25 +1990,106 @@ function updateBookingTime(id) {
   const cb   = document.getElementById('bcb-' + id);
   const disp = document.getElementById('bdisp-' + id);
   const sel  = document.getElementById('bsel-' + id);
-  const cust = document.getElementById('bcust-' + id);
-  if (!disp) return;
-  const val = sel ? sel.value : (cust ? cust.value : '');
+  if (!disp || !sel) return;
   if (cb && cb.classList.contains('checked')) {
-    disp.textContent = val ? '⏰ ' + val : '';
-    disp.style.display = val ? 'inline-block' : 'none';
+    disp.textContent = sel.value ? '⏰ ' + sel.value : '';
+    disp.style.display = sel.value ? 'inline-block' : 'none';
   }
   saveBookings();
 }
 
+// ── RESTAURANT BOOKING (with date sync to day card) ──
+function toggleRestBooking(id) {
+  const cb   = document.getElementById('bcb-' + id);
+  const stat = document.getElementById('bst-' + id);
+  const disp = document.getElementById('bdisp-' + id);
+  const sel  = document.getElementById('bsel-' + id);
+  const dateEl = document.getElementById('bdate-' + id);
+  if (!cb) return;
+  cb.classList.toggle('checked');
+  const isBooked = cb.classList.contains('checked');
+  if (stat) { stat.textContent = isBooked ? '✅ 已預訂' : '待預訂'; stat.className = 'booking-status ' + (isBooked ? 'booked' : 'pending'); }
+  const time = sel ? sel.value : '';
+  if (disp) { disp.textContent = time ? '⏰ ' + time : ''; disp.style.display = (isBooked && time) ? 'inline-block' : 'none'; }
+  if (isBooked) {
+    syncRestToDay(id);
+  } else {
+    removeRestFromDay(id);
+  }
+  saveBookings();
+}
+
+function syncRestToDay(id) {
+  const cb     = document.getElementById('bcb-' + id);
+  const dateEl = document.getElementById('bdate-' + id);
+  const sel    = document.getElementById('bsel-' + id);
+  const disp   = document.getElementById('bdisp-' + id);
+  const cfg    = REST_CONFIG[id];
+  if (!dateEl || !sel || !cfg) return;
+  const dayId = dateEl.value;
+  const time  = sel.value;
+  // update badge
+  if (disp && cb && cb.classList.contains('checked')) {
+    const label = (dayId ? dayId.toUpperCase() + ' · ' : '') + (time || '');
+    disp.textContent = label ? '⏰ ' + label : '';
+    disp.style.display = label ? 'inline-block' : 'none';
+  }
+  // remove from all slots first
+  removeRestFromDay(id);
+  // inject into target slot
+  if (dayId && time && cb && cb.classList.contains('checked')) {
+    injectRestToSlot(id, dayId, time, cfg);
+  }
+  saveBookings();
+}
+
+function injectRestToSlot(id, dayId, time, cfg) {
+  const slot = document.getElementById('rest-slot-' + dayId);
+  if (!slot) return;
+  const el = document.createElement('div');
+  el.className = 'rest-slot-item';
+  el.id = 'rsi-' + id;
+  el.innerHTML =
+    '<div class="rsi-icon">' + cfg.icon + '</div>' +
+    '<div class="rsi-info">' +
+      '<div class="rsi-name">' + cfg.name + '</div>' +
+      '<div class="rsi-sub">已預訂 · <a onclick="window.open(\'' + cfg.url + '\',\'_blank\')" style="color:var(--sea);text-decoration:underline;cursor:pointer;">官網</a></div>' +
+    '</div>' +
+    '<div class="rsi-time">' + time + '</div>' +
+    '<button class="rsi-remove" onclick="cancelRestBooking(\'' + id + '\')" title="取消預訂">×</button>';
+  slot.appendChild(el);
+}
+
+function removeRestFromDay(id) {
+  const existing = document.getElementById('rsi-' + id);
+  if (existing) existing.remove();
+}
+
+function cancelRestBooking(id) {
+  const cb   = document.getElementById('bcb-' + id);
+  const stat = document.getElementById('bst-' + id);
+  const disp = document.getElementById('bdisp-' + id);
+  const dateEl = document.getElementById('bdate-' + id);
+  const sel  = document.getElementById('bsel-' + id);
+  if (cb) cb.classList.remove('checked');
+  if (stat) { stat.textContent = '待預訂'; stat.className = 'booking-status pending'; }
+  if (disp) { disp.textContent = ''; disp.style.display = 'none'; }
+  removeRestFromDay(id);
+  saveBookings();
+}
+
+// ── SAVE / LOAD ──
 function saveBookings() {
   const data = {};
+  // standard bookings
   document.querySelectorAll('[id^="bcb-"]').forEach(cb => {
     const id = cb.id.replace('bcb-','');
-    const sel  = document.getElementById('bsel-'  + id);
-    const cust = document.getElementById('bcust-' + id);
+    const sel    = document.getElementById('bsel-'  + id);
+    const dateEl = document.getElementById('bdate-' + id);
     data[id] = {
       checked: cb.classList.contains('checked'),
-      time: sel ? sel.value : (cust ? cust.value : '')
+      time:  sel    ? sel.value    : '',
+      date:  dateEl ? dateEl.value : '',
     };
   });
   try { localStorage.setItem('trip_bookings', JSON.stringify(data)); } catch(e){}
@@ -1935,23 +2098,34 @@ function saveBookings() {
 function loadBookings() {
   try {
     const data = JSON.parse(localStorage.getItem('trip_bookings') || '{}');
+    // load standard bookings first
     Object.entries(data).forEach(([id, v]) => {
       const cb   = document.getElementById('bcb-'   + id);
       const stat = document.getElementById('bst-'   + id);
       const disp = document.getElementById('bdisp-' + id);
       const sel  = document.getElementById('bsel-'  + id);
-      const cust = document.getElementById('bcust-' + id);
       if (!cb) return;
-      if (v.checked) {
-        cb.classList.add('checked');
-        if (stat) { stat.textContent = '✅ 已預訂'; stat.className = 'booking-status booked'; }
-      }
-      if (v.time) {
-        if (sel)  sel.value  = v.time;
-        if (cust) cust.value = v.time;
-        if (disp && v.checked) {
-          disp.textContent = '⏰ ' + v.time;
-          disp.style.display = 'inline-block';
+      if (v.time && sel) sel.value = v.time;
+      // restaurant bookings
+      if (REST_CONFIG[id]) {
+        const dateEl = document.getElementById('bdate-' + id);
+        if (v.date && dateEl) dateEl.value = v.date;
+        if (v.checked) {
+          cb.classList.add('checked');
+          if (stat) { stat.textContent = '✅ 已預訂'; stat.className = 'booking-status booked'; }
+          if (disp) {
+            const label = (v.date ? v.date.toUpperCase() + ' · ' : '') + (v.time || '');
+            disp.textContent = label ? '⏰ ' + label : '';
+            disp.style.display = label ? 'inline-block' : 'none';
+          }
+          if (v.date && v.time) injectRestToSlot(id, v.date, v.time, REST_CONFIG[id]);
+        }
+      } else {
+        // standard
+        if (v.checked) {
+          cb.classList.add('checked');
+          if (stat) { stat.textContent = '✅ 已預訂'; stat.className = 'booking-status booked'; }
+          if (disp && v.time) { disp.textContent = '⏰ ' + v.time; disp.style.display = 'inline-block'; }
         }
       }
     });
@@ -1961,6 +2135,27 @@ function loadBookings() {
 // ── INIT ──
 loadProgress();
 loadBookings();
+
+// Pre-fill Dim Sum Library if not yet saved
+try {
+  const saved = JSON.parse(localStorage.getItem('trip_bookings') || '{}');
+  if (!saved['dsl'] || !saved['dsl'].checked) {
+    const cb     = document.getElementById('bcb-dsl');
+    const stat   = document.getElementById('bst-dsl');
+    const disp   = document.getElementById('bdisp-dsl');
+    const sel    = document.getElementById('bsel-dsl');
+    const dateEl = document.getElementById('bdate-dsl');
+    if (cb && sel && dateEl) {
+      cb.classList.add('checked');
+      sel.value    = '13:30';
+      dateEl.value = 'd13';
+      if (stat) { stat.textContent = '✅ 已預訂'; stat.className = 'booking-status booked'; }
+      if (disp) { disp.textContent = '⏰ D13 · 13:30'; disp.style.display = 'inline-block'; }
+      injectRestToSlot('dsl', 'd13', '13:30', REST_CONFIG['dsl']);
+      saveBookings();
+    }
+  }
+} catch(e) {}
 
 </script>
 </body>
